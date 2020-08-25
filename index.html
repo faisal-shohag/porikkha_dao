@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>পরীক্ষা দাও</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Google+Sans" as="style" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="./index.css" />
+    <link rel="stylesheet" href="./lg-rg.css" />
+</head>
+<body>
+  
+
+<div class="top-fixed-bar">
+  <div class="user-info-wrapper">
+  <div class="avatar">
+  </div>
+  <div class="user-info">
+  <div class="username"></div>
+  <div class="ranks"><div class="material-icons">military_tech</div><div class="score exam-score">---</div>
+    <div class="material-icons">verified</div> &nbsp; <div class="score exam-count">---</div>
+  </div>
+</div>
+</div>
+</div>
+
+
+
+<!-- profile  -->
+<div id="user-info-modal" class="modal modal-fixed-footer">
+  <div class="modal-content">
+  <center> <div class="modal-avatar">
+  </div>
+  <div style="font-weight: bold;" class="username"></div>
+  <div class="college"></div>
+  <div class="others">
+    <span class="white-text district">From <b>${snap.val().district}</b></span>
+      <div class="box">
+      <div class="box-score">---</div>
+      <div class="box-total-exams">---</div>
+      </div>
+  </div>
+</center>
+
+
+<div class="user-exam-list">
+  <div class="menu-head-small"><div class="material-icons menu-icon">beenhere</div> <span class="menu-text-prac">তোমার পরীক্ষাগুলি</span></div>
+</div>
+
+  
+  </div>
+  <div class="modal-footer red">
+    <button class="btn purple log-out"> লগ আউট!</button>
+  </div>
+</div>
+
+<div class="after-login">
+
+  
+<!-- Exams List -->
+<div class="menu-head"><div class="material-icons menu-icon">gavel</div> <span class="menu-text-prac">সাম্প্রতিক পরীক্ষাগুলি</span></div>
+<div class="exam-list">
+</div>
+<!-- Each exam modal -->
+  
+
+  <!-- Modal Structure -->
+  <div class="eachExamModal">
+  <div id="eachExam" class="modal modal-fixed-footer">
+    <div class="modal-content">
+      <div class="title"></div>
+     
+      <div class="result"></div>
+      <div class="after-end"></div>
+    <form class="questions">
+      
+    </form>
+    </div>
+    <div class="modal-footer">
+      <div class="markedCount"></div>
+      <button class="waves-effect waves-light btn purple" id="sub">সাবমিট করো!</button>
+      <a href="#!" class="modal-close waves-effectmodal-footer waves-green btn-flat cancel-exam"><div class="material-icons back">close</div></a>
+    </div>
+  </div>
+</div>
+  <!-- Each Exam modal ends -->
+
+
+  <!-- LeaderBoard Modal -->
+
+  <div class="eachExamModal">
+    <div id="leaderboard" class="modal modal-fixed-footer">
+      <div class="modal-content">
+        <div class="ld-exam-name"></div>
+     <div class="ld-content">
+       
+     </div>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effectmodal-footer waves-green btn-flat cancel-leaderboard
+        "><div class="material-icons ld-back">close</div></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- LeadeBoard Modal -->
+
+</div>
+
+
+<!-- before Login -->
+  <div class="before">
+    <a class="modal-trigger btn purple lgbtn" href="#login">লগইন করো!</a> আথবা
+    <a class="modal-trigger btn purple rgbtn" href="#register">রেজিস্ট্রেশন করো</a>
+  </div>
+
+  <!-- login -->
+  <div id="login" class="modal login-modal modal-fixed-footer">
+    <div class="modal-content">
+      <h5>লগইন</h5>
+     <div class="msg"></div>
+      <form id="login-form">
+      <div class="input-field">
+        <input id="username" name="username" type="text" required/>
+        <label for="username">তোমার নাম</label>
+      </div>
+
+      <div class="input-field">
+        <input id="mobile" name="phone" type="number" required/>
+        <label for="mobile">তোমার মোবাইল নম্বর</label>
+      </div>
+
+     <button class="btn purple"> লগইন </button>
+      </form>
+    </div>
+
+    <div class="modal-footer">
+      <a>অ্যাকাউন্ট নেই?</a>
+    <a class="modal-trigger btn purple rgbtn" href="#register">রেজিস্ট্রেশন করো</a>
+      <!-- <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a> -->
+    </div>
+  </div>
+
+
+<!-- registration -->
+  <div id="register" class="modal register-modal modal-fixed-footer">
+    
+    <div class="modal-content">
+      <h5>রেজিস্ট্রেশন</h5>
+
+      <div class="preloader-wrapper active loading">
+        <div class="spinner-layer spinner-red-only">
+          <div class="circle-clipper left">
+            <div class="circle"></div>
+          </div><div class="gap-patch">
+            <div class="circle"></div>
+          </div><div class="circle-clipper right">
+            <div class="circle"></div>
+          </div>
+        </div>
+      </div>
+
+
+      <form id="register-form">
+        <div class="input-field">
+          <input id="username" name="username" type="text" required/>
+          <label for="username">তোমার নাম</label>
+        </div>
+  
+        <div class="input-field">
+          <input id="mobile" name="phone" type="number" required/>
+          <label for="mobile">তোমার মোবাইল নম্বর</label>
+        </div>
+
+        <div class="input-field">
+          <input id="college" name="college" type="text" required/>
+          <label for="college">তোমার কলেজ আথবা স্কুল</label>
+        </div>
+
+        <div class="input-field">
+          <input id="district" name="district" type="text" required/>
+          <label for="district">তোমার জেলা</label>
+        </div>
+        
+        <label  class="file-label btn red"> <i class="material-icons left">cloud_upload</i> <span class="fileName">প্রোফাইল ফটো </span>
+        <input type="file" id="file" class="inputfile" name="photo" data-multiple-caption="{count} files selected" multiple/>
+      </label>
+  
+       <button class="btn purple"> রেজিস্ট্রেশন </button>
+        </form>
+
+    </div>
+    <div class="modal-footer">
+      <a>অ্যাকাউন্ট আছে?</a> 
+      <a class="modal-trigger btn purple lgbtn" href="#login">লগইন করো!</a>
+      <!-- <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a> -->
+    </div>
+  </div>
+
+<!-- login & registration end -->
+
+
+
+<div class="user-list">
+    <!-- <div class="user">
+        <div class="user-image"><img src="https://lorempixel.com/100/190/nature/6"></div>
+        <div class="user-details">
+          <span class="name">Faisal Shohag</span><br />
+           <span class="college">Cantonment public school & college</span>
+        </div>
+    </div> -->
+</div>
+
+
+
+<!-- Modal Structure -->
+<div id="user-info" class="modal modal-fixed-footer">
+  <div class="modal-content user-info-content">
+    
+  </div>
+  <div class="modal-footer">
+    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+  </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-storage.js"></script>
+    <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyAx0Oc2oSJA2anwfHseJZqwuAdnojI6jvY",
+      authDomain: "live-exam-7c7a8.firebaseapp.com",
+      databaseURL: "https://live-exam-7c7a8.firebaseio.com",
+      projectId: "live-exam-7c7a8",
+      storageBucket: "live-exam-7c7a8.appspot.com",
+      messagingSenderId: "577429915483",
+      appId: "1:577429915483:web:4fafe4a69bab7b1b063c7e",
+      measurementId: "G-6834S6GV1W"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+    var store = firebase.firestore();
+    var db = firebase.database();
+    var storage = firebase.storage();
+
+  </script>
+  
+    <script src="./index.js"></script>
+    <script src="./lg-rg.js"></script>
+  
+</body>
+</html>

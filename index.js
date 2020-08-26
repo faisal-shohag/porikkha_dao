@@ -50,86 +50,14 @@ var localphone = localStorage.getItem('phone'),
    
 
     if(localtoken!=null){
-   
-      
-    
-      $('.global-rank-icon').click(function(){
-
-        $('.global-ranking-content').html(``);
-        document.querySelector('.global-ranking-content').innerHTML += '<div class="global-rank-title">গ্লোবাল র‍্যাংকিং</div>';
-      // Global Ranking
-      db.ref('hscUsers').on('value', snap=> {
-      var userKeys = [];
-      var usernames = [];
-      var colleges = [];
-      var avatars = [];
-
-       snap.forEach(item=>{
-         userKeys.push(item.key);
-         usernames.push(item.val().username);
-         colleges.push(item.val().college);
-         avatars.push(item.val().avatar);
-       })
-       var unsortedObj = [];
-       
-         for(let i=0; i<userKeys.length; ++i){
-          var scoreCount = 0;
-           db.ref('hscUsers/'+userKeys[i]+'/exams').on('child_added', s=>{
-             //console.log(s.val());
-             scoreCount += s.val().correct;
-           })
-
-           //console.log('username:'+ usernames[i] + ' : '+ scoreCount);
-           var obj = {
-             username: usernames[i],
-             college: colleges[i],
-             avatar: avatars[i],
-             score: scoreCount
-           }
-           unsortedObj.push(obj);
-         }
-
-         
-       unsortedObj.sort(function(a,b){
-         return b.score-a.score;
-       })
-       
-       for(let f=0; f<unsortedObj.length; ++f){
-         var gld = `
-         <div class="gld-items">
-            <div class="gld-number">${f+1}</div>
-            <div class="ld-avatar"><img src="${unsortedObj[f].avatar}" /></div>
-            
-            <div class="gld-info">
-            <div class="gld-username">${unsortedObj[f].username}</div>
-            <div class="gld-college">${unsortedObj[f].college}</div>
-            </div>
-        
-            <div class="gld-score">
-            <div class="gld-cr">${unsortedObj[f].score}</div>
-            </div>
-            </div>
-         `
-         document.querySelector('.global-ranking-content').innerHTML+=gld;
-       }
-
-       
-
-      })
-    })
-      
-
       $('.after-login').show();
     db.ref('hscUsers/'+localtoken).on('value', snap => {
       //console.log(snap.val());
       $('.avatar').html(`<a class="modal-trigger" href="#user-info-modal"><img src="${snap.val().avatar}" /></a>`);
-      $('.username').text(snap.val().username);
+      $('.username').html(`${snap.val().username}`);
       $('.modal-avatar').html(`<img src="${snap.val().avatar}" />`);
       $('.college').text(snap.val().college);
       $('.district').html(`<span class="white-text district">From <b>${snap.val().district}</b></span>
-      
-    
-      
       `)
 
       localStorage.setItem('username', snap.val().username);
@@ -159,6 +87,77 @@ var localphone = localStorage.getItem('phone'),
        document.querySelector('.user-exam-list').innerHTML += userExamList;
 
     })
+
+
+    $('.global-rank-icon').click(function(){
+ 
+    // Global Ranking
+    db.ref('hscUsers').on('value', snap=> {
+      $('.global-ranking-content').html(``);
+
+    var userKeys = [];
+    var usernames = [];
+    var colleges = [];
+    var avatars = [];
+
+     snap.forEach(item=>{
+       userKeys.push(item.key);
+       usernames.push(item.val().username);
+       colleges.push(item.val().college);
+       avatars.push(item.val().avatar);
+     })
+     var unsortedObj = [];
+     
+       for(let i=0; i<userKeys.length; ++i){
+        var scoreCount = 0;
+         db.ref('hscUsers/'+userKeys[i]+'/exams').on('child_added', s=>{
+           //console.log(s.val());
+           scoreCount += s.val().correct;
+         })
+
+         //console.log('username:'+ usernames[i] + ' : '+ scoreCount);
+         
+         var obj = {
+           username: usernames[i],
+           college: colleges[i],
+           avatar: avatars[i],
+           score: scoreCount
+         }
+         unsortedObj.push(obj);
+       }
+
+       
+     unsortedObj.sort(function(a,b){
+       return b.score-a.score;
+     })
+     
+     for(let f=0; f<unsortedObj.length; ++f){
+      if(unsortedObj[f].username === localStorage.getItem('username')) {
+        //console.log('Found!');
+        document.querySelector('.global-ranking-content').innerHTML += `<div class="position">তোমার অবস্থান:  <span class="position-num">${f+1}</span> </div>`;
+      }
+       var gld = `
+       <div class="gld-items">
+          <div class="gld-number">${f+1}</div>
+          <div class="ld-avatar"><img src="${unsortedObj[f].avatar}" /></div>
+          
+          <div class="gld-info">
+          <div class="gld-username">${unsortedObj[f].username}</div>
+          <div class="gld-college">${unsortedObj[f].college}</div>
+          </div>
+      
+          <div class="gld-score">
+          <div class="gld-cr">${unsortedObj[f].score}</div>
+          </div>
+          </div>
+       `
+       document.querySelector('.global-ranking-content').innerHTML+=gld;
+     }
+
+    
+      
+    })
+  })
 
 
 

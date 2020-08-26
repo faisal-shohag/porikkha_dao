@@ -50,6 +50,75 @@ var localphone = localStorage.getItem('phone'),
    
 
     if(localtoken!=null){
+   
+      
+    
+      $('.global-rank-icon').click(function(){
+
+        $('.global-ranking-content').html(``);
+        document.querySelector('.global-ranking-content').innerHTML += '<div class="global-rank-title">গ্লোবাল র‍্যাংকিং</div>';
+      // Global Ranking
+      db.ref('hscUsers').on('value', snap=> {
+      var userKeys = [];
+      var usernames = [];
+      var colleges = [];
+      var avatars = [];
+
+       snap.forEach(item=>{
+         userKeys.push(item.key);
+         usernames.push(item.val().username);
+         colleges.push(item.val().college);
+         avatars.push(item.val().avatar);
+       })
+       var unsortedObj = [];
+       
+         for(let i=0; i<userKeys.length; ++i){
+          var scoreCount = 0;
+           db.ref('hscUsers/'+userKeys[i]+'/exams').on('child_added', s=>{
+             //console.log(s.val());
+             scoreCount += s.val().correct;
+           })
+
+           //console.log('username:'+ usernames[i] + ' : '+ scoreCount);
+           var obj = {
+             username: usernames[i],
+             college: colleges[i],
+             avatar: avatars[i],
+             score: scoreCount
+           }
+           unsortedObj.push(obj);
+         }
+
+         
+       unsortedObj.sort(function(a,b){
+         return b.score-a.score;
+       })
+       
+       for(let f=0; f<unsortedObj.length; ++f){
+         var gld = `
+         <div class="gld-items">
+            <div class="gld-number">${f+1}</div>
+            <div class="ld-avatar"><img src="${unsortedObj[f].avatar}" /></div>
+            
+            <div class="gld-info">
+            <div class="gld-username">${unsortedObj[f].username}</div>
+            <div class="gld-college">${unsortedObj[f].college}</div>
+            </div>
+        
+            <div class="gld-score">
+            <div class="gld-cr">${unsortedObj[f].score}</div>
+            </div>
+            </div>
+         `
+         document.querySelector('.global-ranking-content').innerHTML+=gld;
+       }
+
+       
+
+      })
+    })
+      
+
       $('.after-login').show();
     db.ref('hscUsers/'+localtoken).on('value', snap => {
       //console.log(snap.val());
@@ -95,6 +164,7 @@ var localphone = localStorage.getItem('phone'),
 
     // Exam list
     exams.on('value', snap => {
+      $('.content-loading').remove();
       document.querySelector('.exam-list').innerHTML = '';
       snap.forEach(item => {
         var results = [];

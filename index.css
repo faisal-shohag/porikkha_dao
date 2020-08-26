@@ -69,6 +69,7 @@
   html{
       /* background: #e7e7e7; */
       background: hsl(0, 0%, 93%);
+      /* background: url(./images/polygon-1s-1084px.png); */
   }
 
  
@@ -412,12 +413,6 @@ body, .btn{
     box-shadow: 0px -2px 3px rgba(0,0,0,.2);
 }
 
-#eachExam .cancel-exam{
-    /* position: absolute;
-    /* top: 0; */
-    /* left: 0;  */
-    
-}
 
 #eachExam #sub{
     position: absolute;
@@ -689,9 +684,6 @@ font-weight: bold;
        box-shadow: 0 1px 2px rgba(0,0,0,.2);
    }
 
-   .menu-text-prac{
-       /* border-bottom: 3px solid var(--purple); */
-   }
 
    .ld-items{
        display: flex;
@@ -803,3 +795,105 @@ font-weight: bold;
        color: #fff;
        font-weight: bold;
    }
+
+.content-loading{
+    z-index: 99;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    align-items: center;
+    height: 100%;
+    background: rgba(0,0,0,.6);
+}
+
+.global-rank-icon{
+    float: right;
+    background: var(--purple);
+    color: #fff;
+    border-radius: 50%;
+    padding: 3px;
+    height: 40px;
+    width: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.global-rank-title{
+    text-align: center;
+    font-size: 20px;
+    background: var(--purple);
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    /* font-weight: bold; */
+    font-family: Hind Siliguri;
+    margin-bottom: 20px;
+}
+
+
+.gld-items{
+    display: flex;
+    background: #fff;
+    border-radius: 5px;
+    padding: 5px;
+    box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    position: relative;
+    margin-bottom: 7px;
+}
+.gld-avatar img{
+    height: 30px;
+    width: 30px;
+}
+.gld-avatar{
+    height: 30px;
+    width: 30px;
+    overflow: hidden;
+    border-radius: 50%;
+    margin-right: 5px;
+    margin-left: 30px;
+    border: 2px solid #e7e7e7;
+}
+
+.gld-number{
+    position: absolute;
+    font-size: 40px;
+    top: -11px;
+    left: 10px;
+}
+
+.gld-username{
+    font-weight: bold;
+    margin-bottom: -5px;
+}
+
+.gld-college{
+    font-size: 10px;
+    color: #707070;
+}
+
+.gld-time{
+    display: none;
+}
+
+.gld-cr{
+    font-size: 30px;
+    position: absolute;
+    top: 1px;
+    right: -3%;
+    height: 40px;
+    width: 40px;
+    background: var(--teal);
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 1px 2px rgba(0,0,0,.3);
+}
+
+

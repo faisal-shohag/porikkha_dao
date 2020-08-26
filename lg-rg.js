@@ -16,7 +16,7 @@ $(document).ready(function(){
      
     login.addEventListener('submit', e => {
         e.preventDefault();
-        var username = login.username.value;
+        // var username = login.username.value;
         var phone = login.phone.value;
         var found = false;
         var key;

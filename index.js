@@ -1,48 +1,4 @@
-/*
-const usersRef = db.ref('hscUsers');
-
-usersRef.on('child_added', snap => {
-    //console.log(snap.key)
-
-    var users = `
-    <a class="modal-trigger" href="#user-info">
-    <div class="user  hoverable" id="${snap.key}">
-        <div class="user-image"><img src="${snap.val().avatar}"></div>
-        <div class="user-details">
-          <span class="name">${snap.val().username}</span> <br />
-           <span class="college">${snap.val().school}</span>
-        </div>
-    </div></a>
-    
-    `
-
-    document.querySelector('.user-list').innerHTML += users;
-});
-
-
-$(document).on('click', '.user', function() {
-  var id = $(this)[0].id;
-  //console.log(id);
-  const userInfoRef = db.ref('hscUsers/' + id);
-  userInfoRef.on('value', snap => {
-     // console.log(snap.val());
-      var userInfo = `
-      <div class="user-info">
-      <center>
-      <div class="user-image"><img src="${snap.val().avatar}"></div>
-      <div class="user-name">${snap.val().username}</div>
-      </center>
-      <div class="user-college">College: ${snap.val().school}</div>
-      <div class="user-district">District: ${snap.val().district}</div>
-      <div class="user-phone">Phone: ${snap.val().phone}</div>
-      </div>
-      `
-      document.querySelector('.user-info-content').innerHTML = userInfo;
-  })
-})
- */
-
- const exams = db.ref('exams');
+const exams = db.ref('exams');
 
  $('.after-login').hide(); //hide after login html contents
 var localphone = localStorage.getItem('phone'),
@@ -287,16 +243,16 @@ document.querySelector('.questions').innerHTML += html;
       // timer
       var time = parseInt(exam[0].time);
       var numbers = {
-        0: "০",
-        1: "১",
-        2: "২",
-        3: "৩",
-        4: "৪",
-        5: "৫",
-        6: "৬",
-        7: "৭­",
-        8: "৮",
-        9: "৯"
+        0: "0",
+        1: "1",
+        2: "2",
+        3: "3",
+        4: "4",
+        5: "5",
+        6: "6",
+        7: "7­",
+        8: "8",
+        9: "9"
     };
       
     var interval;
@@ -435,7 +391,7 @@ document.querySelector('.questions').innerHTML += html;
          userExams.push(userExamData);
          M.toast({html: 'সাবমিট হয়েছে!', classes: 'rounded green'});
         }else{
-         M.toast({html: 'পরীক্ষাটি আগেও একবার দিয়েছিলে!', classes: 'rounded red'});
+         //M.toast({html: 'পরীক্ষাটি আগেও একবার দিয়েছিলে!', classes: 'rounded red'});
         }
 
       });
@@ -504,17 +460,3 @@ document.querySelector('.questions').innerHTML += html;
       window.location.reload();
    })
 }
-
-// console.log(localStorage.getItem('username'))
-
-
-
-    
-
-    
-
-    // const result = db.ref('exams/-MEXrwJAgXn9AhSA1-_F/0/result');
-    // var results={
-    //   name: 'Faisal', score: 10
-    // }
-    // result.push(results)

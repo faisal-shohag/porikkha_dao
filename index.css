@@ -250,9 +250,9 @@ body, .btn{
      margin: 10px 10px;
      border-radius: 5px;
      padding: 5px;
-     border-top: 3px solid var(--purple);
+     border-left: 3px solid var(--danger);
      position: relative;
-     background: #f8f9fa;
+     background: #f8f9fa; 
  }
 
  .exam-users{
@@ -263,7 +263,7 @@ body, .btn{
      height: 30px;
      width: 30px;
      border-radius: 50%;
-     background: var(--teal);
+     background: var(--danger);
      display: flex;
      align-items: center;
      justify-content: center;
@@ -275,7 +275,7 @@ body, .btn{
  .exam-title{
      font-size: 17px;
      font-weight: bold;
-     color: var(--purple);
+     color: var(--orange);
  }
 
  .exam-details{
@@ -304,7 +304,8 @@ body, .btn{
      font-weight: bold;
      box-shadow: 0 1px 2px rgba(0,0,0,.3);
      z-index: 100000000000;
-     background: var(--teal);
+     background: var(--danger);
+     color: #fff;
  }
 
  .exam-timer{
@@ -320,8 +321,16 @@ body, .btn{
      font-weight: bold;
      text-align: center;
      /* font-family: 'Hind Siliguri', sans-serif; */
-     font-family: "Shurjo";
+     /* font-family: "Shurjo"; */
      text-shadow: 0 1px 2px rgba(0,0,0,.3);
+     /* background: rgba(225, 225, 225, .1); */
+    
+ }
+
+ #timer::before{
+   content: '⏱';
+   /* position: absolute; */
+   left: 20%;
  }
 
  .questions{
@@ -329,6 +338,7 @@ body, .btn{
   margin-top: 0px;
   z-index: 10;
   margin-top: 50px;
+  
  }
 
  .questions .question{
@@ -339,12 +349,13 @@ body, .btn{
      border-radius: 5px;
      border-top: 3px solid var(--purple);
      background: #fff;
+     margin-bottom: 15px;
 
  }
 .questions .question .q{
     /* color: #707070; */
     color: #000;
-    font-size: 20px;
+    font-size: 17px;
     font-weight: bold;
     margin-bottom: 10px;
 }
@@ -619,7 +630,7 @@ font-weight: bold;
        position: absolute;
        right:7%;
        top: 20%;
-       background: var(--purple);
+       background: var(--orange);
        color: #fff;
        height: 30px;
        width: 30px;
@@ -631,13 +642,14 @@ font-weight: bold;
 
    .ld::after{
        content: 'লিডার বোর্ড';
-       color: #000;
+       color: #fff;
        font-size: 10px;
        position: absolute;
        left: -15px;
        width: 200%;
        bottom: -15px;
-       font-weight: normal;
+       /* font-weight: normal; */
+       font-family: Hind Siliguri;
    }
 
 
@@ -673,7 +685,7 @@ font-weight: bold;
 
 
   .menu-head .menu-icon{
-       background: var(--purple);
+       background: var(--danger);
        height: 40px;
        width: 40px;
        border-radius: 50%;
@@ -693,6 +705,7 @@ font-weight: bold;
        box-shadow: 0 1px 2px rgba(0,0,0,.2);
        position: relative;
        margin-bottom: 7px;
+       border-left: 2px solid var(--orange);
    }
    .ld-avatar img{
        height: 30px;
@@ -710,8 +723,8 @@ font-weight: bold;
 
    .ld-number{
        position: absolute;
-       font-size: 40px;
-       top: -11px;
+       font-size: 25px;
+       top: 0px;
        left: 10px;
    }
 
@@ -730,13 +743,13 @@ font-weight: bold;
    }
 
    .ld-cr{
-       font-size: 30px;
+       font-size: 25px;
        position: absolute;
        top: 1px;
        right: -3%;
        height: 40px;
        width: 40px;
-       background: var(--teal);
+       background: var(--orange);
        color: #fff;
        border-radius: 50%;
        display: flex;
@@ -751,10 +764,11 @@ font-weight: bold;
        font-weight: bold;
        margin-bottom: 10px;
        padding: 10px;
-       background: var(--teal);
+       background: var(--orange);
        border-radius: 10px;
-       color: #e7e7e7;
+       color: #fff;
        box-shadow: 0 1px 2px rgba(0,0,0,.3);
+       font-family: Hind Siliguri;
    }
 
    .markedCount{
@@ -811,7 +825,7 @@ font-weight: bold;
 
 .global-rank-icon{
     float: right;
-    background: var(--purple);
+    background: var(--danger);
     color: #fff;
     border-radius: 50%;
     padding: 3px;
@@ -825,24 +839,26 @@ font-weight: bold;
 .global-rank-title{
     text-align: center;
     font-size: 20px;
-    background: var(--purple);
+    background: var(--danger);
     color: #fff;
     padding: 10px;
     border-radius: 5px;
     /* font-weight: bold; */
     font-family: Hind Siliguri;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
 }
 
 
 .gld-items{
     display: flex;
     background: #fff;
+    /* color: #fff; */
     border-radius: 5px;
     padding: 5px;
     box-shadow: 0 1px 2px rgba(0,0,0,.2);
     position: relative;
     margin-bottom: 7px;
+    border-left: 2px solid var(--danger);
 }
 .gld-avatar img{
     height: 30px;
@@ -860,8 +876,8 @@ font-weight: bold;
 
 .gld-number{
     position: absolute;
-    font-size: 40px;
-    top: -11px;
+    font-size: 25px;
+    top: 0px;
     left: 10px;
 }
 
@@ -880,13 +896,13 @@ font-weight: bold;
 }
 
 .gld-cr{
-    font-size: 30px;
+    font-size: 25px;
     position: absolute;
     top: 1px;
     right: -3%;
     height: 40px;
     width: 40px;
-    background: var(--teal);
+    background: var(--danger);
     color: #fff;
     border-radius: 50%;
     display: flex;

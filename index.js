@@ -134,7 +134,7 @@ var localphone = localStorage.getItem('phone'),
      for(let f=0; f<unsortedObj.length; ++f){
       if(unsortedObj[f].username === localStorage.getItem('username')) {
         //console.log('Found!');
-        document.querySelector('.global-ranking-content').innerHTML += `<div class="position">তোমার অবস্থান:  <span class="position-num">${f+1}</span> </div>`;
+        $('.position-num').text(f+1)
       }
        var gld = `
        <div class="gld-items">

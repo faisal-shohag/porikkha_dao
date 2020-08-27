@@ -128,11 +128,11 @@ if (localtoken != null) {
           item.key
         }">
         <div class="exam-title">${item.val()[0].title}</div>
-        <div class="exam-details"> প্রশ্ন: ${item.val()[0].nq} টি | সময়: ${
+        <div class="exam-details"><small> প্রশ্ন: ${item.val()[0].nq} টি | সময়: ${
         item.val()[0].time
       } মিনিট | মাইনাস মার্কস: ${
         item.val()[0].forWrong
-      } | <small>By: ${item.val()[0].creator}</small> <div style="" class="exam-users"> ${results.length} জন</div></div>
+      } | By: ${item.val()[0].creator}</small> <div style="" class="exam-users"> ${results.length} জন</div></div>
         </div></a>
         `;
       document.querySelector(".exam-list").innerHTML += html;

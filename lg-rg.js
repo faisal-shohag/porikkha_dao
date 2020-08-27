@@ -17,6 +17,12 @@ $(document).ready(function () {
 
     login.addEventListener("submit", (e) => {
       e.preventDefault();
+      $(".msg").html(`<div style="background: var(--green);
+            color: #fff;
+            padding: 5px;
+            border-radius: 5px;
+            text-align:center;
+            transition: 1s;">Just a momment Please....</div>`);
       // var username = login.username.value;
       var phone = login.phone.value;
       var found = false;
@@ -40,7 +46,8 @@ $(document).ready(function () {
             classes: "rounded red",
           });
         } else {
-          localStorage.setItem("username", username);
+            
+          //localStorage.setItem("username", username);
           localStorage.setItem("phone", phone);
           localStorage.setItem("token", key);
 

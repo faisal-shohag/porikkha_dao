@@ -650,6 +650,7 @@ body.dark #user-info-modal{
   padding: 5px;
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 .score-box {
@@ -716,6 +717,34 @@ body.dark #user-info-modal{
   top: 0;
   font-weight: bold;
   color: var(--info);
+}
+
+.mark {
+  border-top: 3px solid var(--info);
+}
+
+.mark::before {
+  content: "স্কোর";
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 0;
+  font-weight: bold;
+  color: var(--orange);
+}
+
+.minus-mark {
+  border-top: 3px solid var(--info);
+}
+
+.minus-mark::before {
+  content: "মাইনাস";
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 0;
+  font-weight: bold;
+  color: var(--red);
 }
 
 .result-data::before {

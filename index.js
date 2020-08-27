@@ -347,10 +347,12 @@ if (localtoken != null) {
         }
 
         $(".result").html(`<div class="result-data">
-      <div class="score-box cr">${cr-(wa*minusMark)}</div>
+      <div class="score-box cr">${cr}</div>
       <div class="score-box wa">${wa}</div>
       <div class="score-box nans">${examLength - 1 - (cr + wa)}</div>
       <div class="score-box tm">${mn1}: ${ss1}</div>
+      <div class="score-box mark">${cr-(wa*minusMark)}</div>
+      <div class="score-box minus-mark">${cr-(cr-(wa*minusMark))}</div>
       </div>`);
 
         // var ansSheet = document.querySelector('.questions');
@@ -375,7 +377,8 @@ if (localtoken != null) {
              // console.log(cr);
               var userExamData = {
                 examTitle: examTitle,
-                correct: cr-(wa*minusMark),
+                correct: cr,
+                mark: cr-(wa*minusMark),
                 wrong: wa,
                 notAns: examLength - 1 - (cr + wa),
                 time: mn1 + ":" + ss1,

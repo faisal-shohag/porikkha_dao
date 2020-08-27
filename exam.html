@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Google+Sans" as="style" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="./index.css">
 
     <style>
         body{
@@ -289,10 +290,10 @@
        <div class="card">
        <h5>${exam[0].title}</h5>
        <small>Time: ${exam[0].time}</small><br>
-       <small>Totdal Q: ${exam[0].nq}</small><br>
+       <small>Number of Q: ${exam[0].nq}</small><br>
        <small>Score: ${exam[0].score}</small><br>
-       <small>For Wrong Ans: -${exam[0].forWrong}</small>
-
+       <small>For Wrong Ans: -${exam[0].forWrong}</small><br>
+       <strong>Creator: ${exam[0].creator}</strong>
        </div>
        
        `);
@@ -354,7 +355,7 @@
 
 
             document.querySelector('.questions').innerHTML += html;
-            //question.reset();
+            question.reset();
 
 
 

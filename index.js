@@ -120,8 +120,9 @@ if (localtoken != null) {
     document.querySelector(".exam-list").innerHTML = "";
     snap.forEach((item) => {
       var results = [];
-      results = Object.entries(item.val()[0].results);
-      // console.log(results.length);
+      if(item.val()[0].results != null || item.val()[0].results != undefined){ results = Object.entries(item.val()[0].results);}
+      
+      
       var html = `
         <a class="modal-trigger"   href="#eachExam"><div class="exam-card" id="${
           item.key
@@ -131,7 +132,7 @@ if (localtoken != null) {
         item.val()[0].time
       } মিনিট | মাইনাস মার্কস: ${
         item.val()[0].forWrong
-      } | <div style="" class="exam-users"> ${results.length} জন</div></div>
+      } | <small>By: ${item.val()[0].creator}</small> <div style="" class="exam-users"> ${results.length} জন</div></div>
         </div></a>
         `;
       document.querySelector(".exam-list").innerHTML += html;
@@ -141,6 +142,7 @@ if (localtoken != null) {
   // open each exam
   var examTitle = "";
   var examToken = "";
+  var minusMark = "";
   var examLength = 0;
   $(document).on("click", ".exam-card", function () {
     var key = $(this)[0].id;
@@ -163,6 +165,7 @@ if (localtoken != null) {
       exam = snap.val();
       examTitle = snap.val()[0].title;
       examLength = snap.val().length;
+      minusMark = snap.val()[0].forWrong;
     });
 
     // Leader board
@@ -175,7 +178,9 @@ if (localtoken != null) {
       var ld_count = 1;
       var ldData = [];
       ldRef.on("child_added", (snap) => ldData.push(snap.val()));
-
+      //console.log(ldData.length)
+      if(ldData.length!=0) $('.no-data').hide();
+      else $('.no-data').show();
       for (let i = ldData.length - 1; i >= 0; --i) {
         var html = `
     <div class="ld-items">
@@ -212,7 +217,7 @@ if (localtoken != null) {
       correctAns.push(exam[i].expln);
       var html = `
             <div class="question">
-    <div class="q">${exam[i].q}</div>
+    <div class="q">${i}. ${exam[i].q}</div>
    <div class="options">
        <label>
            <input id="1" type="radio" name="${i}">
@@ -326,12 +331,11 @@ if (localtoken != null) {
     //Exam Engine End
 
     //Submit handle
-
     $("#sub")
       .unbind()
       .click(function () {
         $("#sub").hide();
-
+        if(forWrong==="") forWrong = 0;
         $(".modal-content").animate({ scrollTop: 0 }, "slow");
         clearInterval(interval);
         var soln;
@@ -343,12 +347,10 @@ if (localtoken != null) {
         }
 
         $(".result").html(`<div class="result-data">
-      
-      <div class="score-box cr">${cr}</div>
+      <div class="score-box cr">${cr-(wa*parseInt(forWrong))}</div>
       <div class="score-box wa">${wa}</div>
       <div class="score-box nans">${examLength - 1 - (cr + wa)}</div>
       <div class="score-box tm">${mn1}: ${ss1}</div>
-      
       </div>`);
 
         // var ansSheet = document.querySelector('.questions');
@@ -358,7 +360,7 @@ if (localtoken != null) {
         //Send Data to user
         const token = localStorage.getItem("token");
         const userExams = db.ref("hscUsers/" + token + "/exams");
-
+        
         if (cr != 0) {
           userExams.on("value", (snap) => {
             var found = false;
@@ -368,11 +370,12 @@ if (localtoken != null) {
               }
             });
 
+
             if (!found) {
-              console.log(cr);
+             // console.log(cr);
               var userExamData = {
                 examTitle: examTitle,
-                correct: cr,
+                correct: cr-(wa*parseInt(forWrong)),
                 wrong: wa,
                 notAns: examLength - 1 - (cr + wa),
                 time: mn1 + ":" + ss1,
@@ -418,9 +421,9 @@ if (localtoken != null) {
             classes: "rounded green",
           });
         }
-
         cr = 0;
         wa = 0;
+        forWrong = 0;
       });
     // Submit handle End
 

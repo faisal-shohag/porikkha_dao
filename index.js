@@ -142,7 +142,7 @@ if (localtoken != null) {
   // open each exam
   var examTitle = "";
   var examToken = "";
-  var minusMark = "";
+  var minusMark = 0;
   var examLength = 0;
   $(document).on("click", ".exam-card", function () {
     var key = $(this)[0].id;
@@ -165,7 +165,7 @@ if (localtoken != null) {
       exam = snap.val();
       examTitle = snap.val()[0].title;
       examLength = snap.val().length;
-      minusMark = snap.val()[0].forWrong;
+      minusMark = parseInt(snap.val()[0].forWrong);
     });
 
     // Leader board
@@ -335,7 +335,7 @@ if (localtoken != null) {
       .unbind()
       .click(function () {
         $("#sub").hide();
-        if(forWrong==="") forWrong = 0;
+        if(minusMark==="") minusMark = 0;
         $(".modal-content").animate({ scrollTop: 0 }, "slow");
         clearInterval(interval);
         var soln;
@@ -347,7 +347,7 @@ if (localtoken != null) {
         }
 
         $(".result").html(`<div class="result-data">
-      <div class="score-box cr">${cr-(wa*parseInt(forWrong))}</div>
+      <div class="score-box cr">${cr-(wa*minusMark)}</div>
       <div class="score-box wa">${wa}</div>
       <div class="score-box nans">${examLength - 1 - (cr + wa)}</div>
       <div class="score-box tm">${mn1}: ${ss1}</div>
@@ -375,7 +375,7 @@ if (localtoken != null) {
              // console.log(cr);
               var userExamData = {
                 examTitle: examTitle,
-                correct: cr-(wa*parseInt(forWrong)),
+                correct: cr-(wa*minusMark),
                 wrong: wa,
                 notAns: examLength - 1 - (cr + wa),
                 time: mn1 + ":" + ss1,

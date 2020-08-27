@@ -8,8 +8,8 @@ const users = db.ref("hscUsers");
 $(document).ready(function () {
   $(".modal").modal();
   if (
-    localStorage.getItem("username") === null ||
-    localStorage.getItem("username") === undefined
+    localStorage.getItem("token") === null ||
+    localStorage.getItem("token") === undefined
   ) {
     $(".login-modal").modal("open");
     //   $('.register-modal').modal('open');
@@ -47,7 +47,7 @@ $(document).ready(function () {
           });
         } else {
             
-          //localStorage.setItem("username", username);
+        //   localStorage.setItem("username", username);
           localStorage.setItem("phone", phone);
           localStorage.setItem("token", key);
 

@@ -345,6 +345,10 @@ body.dark #user-info-modal{
   margin-top: 100px;
 }
 
+.exam-list{
+  margin-top: 10px;
+}
+
 .exam-card {
   text-align: center;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
@@ -465,6 +469,7 @@ body.dark #user-info-modal{
 [type="radio"]:checked + span {
   color: #707070;
   font-size: 17px;
+  height: auto;
 }
 
 [type="radio"]:not(:checked) + span {
@@ -660,7 +665,7 @@ body.dark #user-info-modal{
   text-align: center;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
   position: relative;
-  margin: 0 2px;
+  margin: 2px 2px;
 }
 
 .cr {
@@ -720,7 +725,7 @@ body.dark #user-info-modal{
 }
 
 .mark {
-  border-top: 3px solid var(--info);
+  border-top: 3px solid var(--orange);
 }
 
 .mark::before {
@@ -734,7 +739,7 @@ body.dark #user-info-modal{
 }
 
 .minus-mark {
-  border-top: 3px solid var(--info);
+  border-top: 3px solid var(--danger);
 }
 
 .minus-mark::before {
@@ -866,8 +871,8 @@ body.dark #user-info-modal{
 
 .ld-number {
   position: absolute;
-  font-size: 25px;
-  top: 0px;
+  font-size: 17px;
+  top: 9px;
   left: 10px;
 }
 
@@ -886,7 +891,7 @@ body.dark #user-info-modal{
 }
 
 .ld-cr {
-  font-size: 25px;
+  font-size: 16px;
   position: absolute;
   top: 1px;
   right: -3%;
@@ -900,6 +905,7 @@ body.dark #user-info-modal{
   align-items: center;
   text-align: center;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  font-weight: bold;
 }
 
 .ld-exam-name {
@@ -973,11 +979,21 @@ body.dark #user-info-modal{
   color: #fff;
   border-radius: 50%;
   padding: 3px;
-  height: 40px;
-  width: 40px;
+  height: 35px;
+  width: 35px;
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+}
+
+.global-rank-icon::after{
+  content: 'গ্লোবাল র‍্যাংকিং';
+  position: absolute;
+  font-size: 10px;
+  color: var(--danger);
+  bottom: -15px;
+  width: 190%;
 }
 
 .global-rank-title {
@@ -1019,8 +1035,8 @@ body.dark #user-info-modal{
 
 .gld-number {
   position: absolute;
-  font-size: 25px;
-  top: 0px;
+  font-size: 15px;
+  top: 9px;
   left: 10px;
 }
 
@@ -1039,7 +1055,7 @@ body.dark #user-info-modal{
 }
 
 .gld-cr {
-  font-size: 25px;
+  font-size: 15px;
   position: absolute;
   top: 1px;
   right: -3%;
@@ -1053,6 +1069,7 @@ body.dark #user-info-modal{
   align-items: center;
   text-align: center;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  font-weight: bold;
 }
 
 .position {

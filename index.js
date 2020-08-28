@@ -32,7 +32,7 @@ if (localtoken != null) {
     count = 0;
   var total_score = 0;
   db.ref("hscUsers/" + localtoken + "/exams").on("child_added", (snap) => {
-    total_score += snap.val().correct;
+    total_score += snap.val().mark;
     $(".exam-score").text("স্কোর " + total_score);
     $(".box-score").html(total_score);
 
@@ -43,7 +43,7 @@ if (localtoken != null) {
     var userExamList = `
        <div class="user-exams">
        <div class="user-exam-name">${snap.val().examTitle}</div>
-       <div class="user-exam-score">${snap.val().correct}</div> 
+       <div class="user-exam-score">${snap.val().mark}</div> 
        </div>
        `;
     document.querySelector(".user-exam-list").innerHTML += userExamList;
@@ -71,7 +71,7 @@ if (localtoken != null) {
         var scoreCount = 0;
         db.ref("hscUsers/" + userKeys[i] + "/exams").on("child_added", (s) => {
           //console.log(s.val());
-          scoreCount += s.val().correct;
+          scoreCount += s.val().mark;
         });
 
         //console.log('username:'+ usernames[i] + ' : '+ scoreCount);
@@ -118,25 +118,46 @@ if (localtoken != null) {
   exams.on("value", (snap) => {
     $(".content-loading").remove();
     document.querySelector(".exam-list").innerHTML = "";
+    var resultLen = [];
+    var examsData = [];
+    var ekey = [];
     snap.forEach((item) => {
       var results = [];
-      if(item.val()[0].results != null || item.val()[0].results != undefined){ results = Object.entries(item.val()[0].results);}
+      if(item.val()[0].results != null || item.val()[0].results != undefined){ results = Object.entries(item.val()[0].results);
+        resultLen.push(results.length);
+      }
+      if(results.length === 0) resultLen.push(0);
+      var edata = {
+        title: item.val()[0].title,
+        nq: item.val()[0].nq,
+        time: item.val()[0].time,
+        forWrong: item.val()[0].forWrong,
+        creator: item.val()[0].creator
+      }
+     examsData.push(edata);
+     ekey.push(item.key);
       
-      
+    });
+
+    //console.log(examsData);
+
+    for(let b=resultLen.length-1; b>=0; b--){
       var html = `
         <a class="modal-trigger"   href="#eachExam"><div class="exam-card" id="${
-          item.key
+          ekey[b]
         }">
-        <div class="exam-title">${item.val()[0].title}</div>
-        <div class="exam-details"><small> প্রশ্ন: ${item.val()[0].nq} টি | সময়: ${
-        item.val()[0].time
+        <div class="exam-title">${examsData[b].title}</div>
+        <div class="exam-details"><small> প্রশ্ন: ${examsData[b].nq} টি | সময়: ${
+          examsData[b].time
       } মিনিট | মাইনাস মার্কস: ${
-        item.val()[0].forWrong
-      } | By: ${item.val()[0].creator}</small> <div style="" class="exam-users"> ${results.length} জন</div></div>
+        examsData[b].forWrong
+      } | By: ${examsData[b].creator}</small> <div style="" class="exam-users"> ${resultLen[b]} জন</div></div>
         </div></a>
         `;
       document.querySelector(".exam-list").innerHTML += html;
-    });
+    }
+
+    
   });
 
   // open each exam
@@ -165,7 +186,7 @@ if (localtoken != null) {
       exam = snap.val();
       examTitle = snap.val()[0].title;
       examLength = snap.val().length;
-      minusMark = parseInt(snap.val()[0].forWrong);
+      minusMark = parseFloat(snap.val()[0].forWrong);
     });
 
     // Leader board
@@ -174,7 +195,7 @@ if (localtoken != null) {
       $(".ld-content").html("");
       const ldRef = db
         .ref("exams/" + examToken + "/0/results")
-        .orderByChild("correct");
+        .orderByChild("mark");
       var ld_count = 1;
       var ldData = [];
       ldRef.on("child_added", (snap) => ldData.push(snap.val()));
@@ -193,7 +214,7 @@ if (localtoken != null) {
     </div>
 
     <div class="ld-score">
-    <div class="ld-cr">${ldData[i].correct}</div>
+    <div class="ld-cr">${ldData[i].mark}</div>
     
     <span class="ld-time">${ldData[i].time}</span>
     </div>
@@ -335,7 +356,7 @@ if (localtoken != null) {
       .unbind()
       .click(function () {
         $("#sub").hide();
-        if(minusMark==="") minusMark = 0;
+        
         $(".modal-content").animate({ scrollTop: 0 }, "slow");
         clearInterval(interval);
         var soln;
@@ -407,6 +428,7 @@ if (localtoken != null) {
               var leaderboardData = {
                 examTitle: examTitle,
                 correct: cr,
+                mark: cr-(wa*minusMark),
                 wrong: wa,
                 notAns: examLength - 1 - (cr + wa),
                 time: mn1 + ":" + ss1,

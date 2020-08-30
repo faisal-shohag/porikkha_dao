@@ -22,12 +22,79 @@ if (localtoken != null) {
     }</b></span>
       `);
 
+      if(snap.val().ntfStatus.active===true){
+        $('.ntfStatus').addClass('ntf-active');
+        $('.ntf').addClass('ntf-status');
+      }else{
+        $('.ntfStatus').removeClass('ntf-active');
+        $('.ntf').removeClass('ntf-status');
+      }
+
     localStorage.setItem("username", snap.val().username);
     localStorage.setItem("college", snap.val().college);
     localStorage.setItem("district", snap.val().district);
     localStorage.setItem("avatar", snap.val().avatar);
     //$('.username')
   });
+
+
+
+
+
+
+
+
+  //Showing Notifications
+
+  db.ref("hscUsers/" + localtoken + '/notifications').on('value', snap=>{
+    document.querySelector('.ntf-list').innerHTML = '';
+    document.querySelector('.no-ntfs').innerHTML = '';
+ var ntfsData = [];
+  snap.forEach(item=>{
+    var ntfs = {
+      notification: item.val().notification,
+      time: item.val().time
+    }
+    ntfsData.push(ntfs);
+    //console.log(item.val());
+  })
+  if(ntfsData.length===0){$('.no-ntfs').html(`<h4>কোনো নোটিফিকেশন নেই</h4>`)}
+  $('.ntf-count').html(`(${ntfsData.length})`)
+  for(let r = ntfsData.length-1; r>=0; --r){
+     var time = new Date(ntfsData[r].time);
+    time = time.toString().split(' ');
+    //console.log(snap.val());
+   var ntfs = `
+   <div class="ntf-card">
+   <div class="ntf-time">${time[2]} ${time[1]}, ${time[3]} | ${time[4]}</div>
+   <div class="ntf-text">${ntfsData[r].notification}</div>
+  </div>
+   `
+   document.querySelector('.ntf-list').innerHTML += ntfs;
+  
+  }
+  
+  
+  })
+
+// update notification status
+$('.ntf-trigger').click(function(){
+  db.ref("hscUsers/" + localtoken + '/ntfStatus').set({active: false});
+})
+
+// clear all notifications
+$('.ntfs-clear').click(function(){
+  db.ref("hscUsers/" + localtoken + '/notifications').remove();
+})
+
+
+
+
+
+
+
+
+
   var i = 1,
     count = 0;
   var total_score = 0;
@@ -147,11 +214,12 @@ if (localtoken != null) {
           ekey[b]
         }">
         <div class="exam-title">${examsData[b].title}</div>
+        <div class="user-count"><span class="icofont-tick-mark"></span> ${resultLen[b]}</span>
         <div class="exam-details"><small> প্রশ্ন: ${examsData[b].nq} টি | সময়: ${
           examsData[b].time
       } মিনিট | মাইনাস মার্কস: ${
         examsData[b].forWrong
-      } | By: ${examsData[b].creator}</small> <div style="" class="exam-users"> ${resultLen[b]} জন</div></div>
+      } | By: ${examsData[b].creator}</small></div>
         </div></a>
         `;
       document.querySelector(".exam-list").innerHTML += html;

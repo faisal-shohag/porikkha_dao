@@ -17,11 +17,17 @@
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="./icofont/icofont.min.css">
     <link rel="stylesheet" href="./index.css" />
     <link rel="stylesheet" href="./lg-rg.css" />
   </head>
 
   <body>
+
+    
+    
+
+
     <div class="fixed-action-btn">
       <a
         class="btn-floating btn-large black dark-toggle"
@@ -41,10 +47,21 @@
             <div class="material-icons">verified</div>
             &nbsp;
             <div class="score exam-count">---</div>
+           
           </div>
         </div>
       </div>
+      <a class="modal-trigger ntf-trigger " href="#notifications-modal"><div class="icofont-notification ntf ntf-status"></div></a>
+      <div class="ntfStatus"></div>
+      <a href="#" data-target="slide-out" class="sidenav-trigger"><div class="icofont-navigation-menu nav-bar"></div></a>
     </div>
+
+
+    <!-- sidenavbar-->
+    <ul id="slide-out" class="sidenav">
+      
+    </ul>
+    <!-- sidenavbar -->
 
     <!-- profile  -->
     <div class="lgrg-modal">
@@ -76,6 +93,29 @@
           <button class="btn log-out">লগ আউট!</button>
           <a href="#" class="modal-close">
             <div class="exit"><span class="material-icons">close</span></div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Notifications -->
+
+    <div class="lgrg-modal">
+      <div id="notifications-modal" class="modal modal-fixed-footer">
+        <div class="modal-content">
+         <h5><span class="icofont-notification"></span> নোটিফিকেশন <span class="ntf-count"></span> <span style="float: right;" class="icofont-bin ntfs-clear"></span></h5>
+         <div class="no-ntfs"></div>
+         <div class="ntf-list">
+          
+
+          
+
+         </div>
+            
+        </div>
+        <div class="modal-footer red">
+          <a href="#" class="modal-close">
+            <div class="exit-right"><span class="material-icons">close</span></div>
           </a>
         </div>
       </div>

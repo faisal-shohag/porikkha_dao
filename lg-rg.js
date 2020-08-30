@@ -196,3 +196,8 @@ $(document).ready(function () {
 $(".lg-reload").click(function () {
   window.location.reload();
 });
+
+$(document).ready(function(){
+  $('.sidenav').sidenav();
+});
+   

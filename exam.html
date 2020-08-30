@@ -47,81 +47,33 @@
         input{
             color: #fff;
         }
+
+        textarea{
+            color: #fff;
+            height: 100px;
+        }
     </style>
 </head>
 <body>
 
 
 
-<!-- <div class="question"> -->
-<!-- <div class="question">
-    <div class="q">1. Who are you?</div>
-   <div class="options">
-       <label>
-           <input id="1" type="radio" name="4">
-           <span>Human</span>
-       </label><br>
-       <label>
-        <input id="2" type="radio" name="4">
-        <span>Animal</span>
-    </label><br>
-
-    <label>
-        <input id="3" type="radio" name="4">
-        <span>Reptile</span>
-    </label><br>
-
-    <label>
-        <input id="4" type="radio" name="4">
-        <span>No body</span>
-    </label>
-   </div>
-</div> -->
+    <div class="ntf-sent">
+        <form id="notifications">
+            <div class="input-field">
+                <textarea type="text" id="ntf-text" name="ntf" placeholder="Write notification here..." required ></textarea>
+            </div>
+            <button class="btn">Sent</button>
+        </form>
+    </div>
 
 
 
 
-<!-- <div class="question">
-    <div class="q">2. What is your favourite color?</div>
-   <div class="options">
-       <label>
-           <input id="1"  type="radio" name="2">
-           <span>Red</span>
-       </label><br>
-       <label>
-        <input id="2" type="radio" name="2">
-        <span>Yellow</span>
-    </label><br>
-
-    <label>
-        <input id="3" type="radio" name="2">
-        <span>Purple</span>
-    </label><br>
-
-    <label>
-        <input id="4" type="radio" name="2">
-        <span>Green</span>
-    </label>
-   </div>
-</div> -->
 
 
 
-<!-- </div> -->
-<!-- 
-<div class="score"></div>
-
-<div class="ansSheet">
-
-</div>
-
-<button class="btn" id="sub">Submit</button> -->
-
-
-
-<!-- exam details form -->
-
-
+<div class="exam-set" style="display: none;">
 <form id="exam-details">
     <center><h5>Details</h5></center>
     <div class="input-field">
@@ -222,7 +174,7 @@
 </div>
 <br>
 <button style="display: none;" class="btn" id="toDatabase">Push to Database</button>
-
+</div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
@@ -258,6 +210,58 @@
 
   </script>
 <script>
+
+var getServerTime = function( cb ) {
+    this.db.ref( '.info/serverTimeOffset' ).once( 'value', function( snap ) {
+      var offset = snap.val();
+
+      // Get server time by milliseconds
+      cb( new Date().getTime() + offset );
+    });
+};
+
+var serverTime;
+getServerTime( function( now ) {
+    serverTime = now;
+});
+
+
+    // notification sending
+
+    const notification = document.querySelector('#notifications');
+   db.ref('hscUsers').once('value', snap=>{
+
+    var usersKey = [];
+       snap.forEach(element => {
+           usersKey.push(element.key);
+           
+       });
+
+       
+
+       notification.addEventListener('submit', e=>{
+        e.preventDefault();
+       var ntfTime = serverTime;
+       var ntf = notification.ntf.value;
+        //console.log(notification.ntf.value);
+        var data = {
+            notification: ntf,
+            time: ntfTime,
+        }
+        var ntfActive = {
+            active: true
+        }
+
+        for(let n=0; n<usersKey.length; ++n){
+            db.ref('hscUsers/'+ usersKey[n] + '/notifications').push(data);
+            db.ref('hscUsers/'+ usersKey[n] + '/ntfStatus').set(ntfActive);
+        }
+
+    });
+
+
+   })
+   
 
 
 

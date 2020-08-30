@@ -58,9 +58,14 @@ if (localtoken != null) {
     ntfsData.push(ntfs);
     //console.log(item.val());
   })
-  if(ntfsData.length===0){$('.no-ntfs').html(`<h4>কোনো নোটিফিকেশন নেই</h4>`)}
+
+  console.log(ntfsData);
   $('.ntf-count').html(`(${ntfsData.length})`)
+  if(ntfsData.length===0){ $('.no-ntfs').show(); $('.no-ntfs').html(`<h4>কোনো নোটিফিকেশন নেই</h4>`)}
+  else{
+    $('.no-ntfs').hide();
   for(let r = ntfsData.length-1; r>=0; --r){
+    console.log(ntfsData[r].notification)
      var time = new Date(ntfsData[r].time);
     time = time.toString().split(' ');
     //console.log(snap.val());
@@ -73,6 +78,7 @@ if (localtoken != null) {
    document.querySelector('.ntf-list').innerHTML += ntfs;
   
   }
+}
   
   
   })

@@ -251,8 +251,8 @@ body.dark #user-info-modal{
 
 .ntf-active{
    position: absolute;
-   top: 50%;
-   right: 10%;
+   top: 65%;
+   right: 13%;
    height: 11px;
    width: 11px;
    background: lightgreen;

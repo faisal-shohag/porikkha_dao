@@ -28,14 +28,9 @@
     
 
 
-    <div class="fixed-action-btn">
-      <a
-        class="btn-floating btn-large black dark-toggle"
-        href="#"
-        title="ডার্ক/লাইট"
-        ><i class="material-icons left">brightness_4</i></a
-      >
-    </div>
+   
+     
+    
     <div class="top-fixed-bar">
       <div class="user-info-wrapper">
         <div class="avatar"></div>
@@ -59,7 +54,14 @@
 
     <!-- sidenavbar-->
     <ul id="slide-out" class="sidenav">
-      
+      <li>
+        <a
+        class="dark-toggle"
+        href="#"
+        title="ডার্ক/লাইট"
+        ><i class="material-icons theme-icon-status">brightness_4</i> <span class="theme-status">Dark</span></a
+      >
+      </li>
     </ul>
     <!-- sidenavbar -->
 
@@ -515,8 +517,10 @@
       $(".dark-toggle").on("click", function () {
         if ($(this).find("i").text() == "brightness_4") {
           $(this).find("i").text("brightness_high");
+          $('.theme-status').text('Dark');
         } else {
           $(this).find("i").text("brightness_4");
+          $('.theme-status').text('Light');
         }
         localStorage.setItem(
           "mode",
@@ -536,6 +540,14 @@
       localStorage.getItem("mode") === "dark"
         ? document.querySelector("html").classList.add("html-dark")
         : document.querySelector("html").classList.remove("html-dark");
+
+        if(localStorage.getItem('mode')==='dark'){
+          $('.theme-status').text('Light');
+          $('.theme-icon-status').text('brightness_high');
+        }else{
+          $('.theme-status').text('Dark');
+          $('.theme-icon-status').text('brightness_4');
+      }
     </script>
   </body>
 </html>

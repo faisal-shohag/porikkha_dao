@@ -1285,6 +1285,15 @@ position: relative;
           animation: anim-glow-ntf 2s ease infinite;
 }
 
+.no-ntfs{
+  display: flex;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  color: #707070;
+}
+
 
 
 

@@ -56,7 +56,7 @@
 </head>
 <body>
 
-
+<button class="btn view-set-q">Toogle</button><br>
 
     <div class="ntf-sent">
         <form id="notifications">
@@ -190,6 +190,11 @@
         $('.push_db').click(function(){
             $('#toDatabase').toggle();
         });
+
+        $('.view-set-q').click(function(){
+            $('.ntf-sent').toggle();
+            $('.exam-set').toggle();
+        })
     // Your web app's Firebase configuration
     var firebaseConfig = {
       apiKey: "AIzaSyAx0Oc2oSJA2anwfHseJZqwuAdnojI6jvY",

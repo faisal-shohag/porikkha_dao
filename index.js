@@ -9,7 +9,7 @@ if (localtoken != null) {
   $(".after-login").show();
   $('.top-fixed-bar').show();
   db.ref("hscUsers/" + localtoken).on("value", (snap) => {
-    //console.log(snap.val());
+    $(".content-loading").remove();
     $(".avatar").html(
       `<a class="modal-trigger" href="#user-info-modal"><img src="${
         snap.val().avatar
@@ -69,10 +69,10 @@ if (localtoken != null) {
     //console.log(ntfsData[r].notification)
      var time = new Date(ntfsData[r].time);
     time = time.toString().split(' ');
-    //console.log(snap.val());
+    var time =  time[1] +' '+ time[2] + ', ' + time[3] + ' ' + time[4]
    var ntfs = `
    <div class="ntf-card">
-   <div class="ntf-time">${time[2]} ${time[1]}, ${time[3]} | ${time[4]}</div>
+   <div class="ntf-time">${getRelativeTime(time)}</div>
    <div class="ntf-text">${ntfsData[r].notification}</div>
   </div>
    `
@@ -188,9 +188,18 @@ $('.ntfs-clear').click(function(){
     });
   });
 
+
+// menulist and exams
+  $('.menu-sub-click').click(function(){
+    //console.log($(this))
+   var icon = ($(this)[0].lastElementChild.firstChild.nextElementSibling.lastChild);
+   //console.log(icon)
+    var text = ($(this)[0].lastElementChild.innerText)
+   var REF = $(this)[0].id;
+   $('.menu-list-icon-and-text').html(`${icon.outerHTML} ${text}`)
   // Exam list
-  exams.on("value", (snap) => {
-    $(".content-loading").remove();
+  db.ref(REF).on("value", (snap) => {
+   
     document.querySelector(".exam-list").innerHTML = "";
     var resultLen = [];
     var examsData = [];
@@ -213,11 +222,9 @@ $('.ntfs-clear').click(function(){
       
     });
 
-    //console.log(examsData);
-
     for(let b=resultLen.length-1; b>=0; b--){
       var html = `
-        <a class="modal-trigger"   href="#eachExam"><div class="exam-card" id="${
+        <a class="modal-trigger"    href="#eachExam"><div class="exam-card ${REF}"  id="${
           ekey[b]
         }">
         <div class="exam-title">${examsData[b].title}</div>
@@ -231,9 +238,10 @@ $('.ntfs-clear').click(function(){
         `;
       document.querySelector(".exam-list").innerHTML += html;
     }
-
-    
+ 
   });
+
+});
 
   // open each exam
   var examTitle = "";
@@ -242,11 +250,12 @@ $('.ntfs-clear').click(function(){
   var examLength = 0;
   $(document).on("click", ".exam-card", function () {
     var key = $(this)[0].id;
+    var sub_name = $(this)[0].classList[1];
     examToken = key;
     var exam = [];
     var ans = [];
     var correctAns = [];
-    var eachExamRef = db.ref("exams/" + key);
+    var eachExamRef = db.ref(sub_name + "/" + key);
     eachExamRef.once("value", (snap) => {
       $(".ld-exam-name").html(`${snap.val()[0].title}`);
       $(".title").html(`${
@@ -566,3 +575,9 @@ window.addEventListener("offline", () => {
   $(".offline").show();
   Swal.fire('You are offline now!', 'Please check your internet connections!', 'error');
 });
+
+// moment js for time counting
+function getRelativeTime(date) {
+  const d = new Date(date);
+  return moment(d).fromNow();
+}

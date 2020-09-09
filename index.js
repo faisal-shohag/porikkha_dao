@@ -1,5 +1,5 @@
 const exams = db.ref("exams");
-
+$('.top-fixed-bar').hide();
 $(".after-login").hide(); //hide after login html contents
 var localphone = localStorage.getItem("phone"),
   localtoken = localStorage.getItem("token");
@@ -7,6 +7,7 @@ var localphone = localStorage.getItem("phone"),
 if (localtoken != null) {
   $(".before-login").remove();
   $(".after-login").show();
+  $('.top-fixed-bar').show();
   db.ref("hscUsers/" + localtoken).on("value", (snap) => {
     //console.log(snap.val());
     $(".avatar").html(
@@ -59,13 +60,13 @@ if (localtoken != null) {
     //console.log(item.val());
   })
 
-  console.log(ntfsData);
+  //console.log(ntfsData);
   $('.ntf-count').html(`(${ntfsData.length})`)
   if(ntfsData.length===0){ $('.no-ntfs').show(); $('.no-ntfs').html(`<h4>কোনো নোটিফিকেশন নেই</h4>`)}
   else{
     $('.no-ntfs').hide();
   for(let r = ntfsData.length-1; r>=0; --r){
-    console.log(ntfsData[r].notification)
+    //console.log(ntfsData[r].notification)
      var time = new Date(ntfsData[r].time);
     time = time.toString().split(' ');
     //console.log(snap.val());

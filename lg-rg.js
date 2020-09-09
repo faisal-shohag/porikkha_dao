@@ -13,7 +13,7 @@ $(document).ready(function () {
   ) {
     $(".login-modal").modal("open");
     //   $('.register-modal').modal('open');
-    M.toast({ html: "তুমি এখনো লগইন করোনি!", classes: "rounded red" });
+    M.toast({ html: "You are logged out!", classes: "rounded red" });
 
     login.addEventListener("submit", (e) => {
       e.preventDefault();
@@ -22,7 +22,7 @@ $(document).ready(function () {
             padding: 5px;
             border-radius: 5px;
             text-align:center;
-            transition: 1s;">Just a momment Please....</div>`);
+            transition: 1s;">ইকটুখানি...</div>`);
       // var username = login.username.value;
       var phone = login.phone.value;
       var found = false;

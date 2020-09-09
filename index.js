@@ -551,3 +551,18 @@ $('.ntfs-clear').click(function(){
 }
 
 localStorage.getItem("mode");
+
+
+window.addEventListener("online", () => {
+  $(".offline").hide();
+$('.swal2-confirm').click();
+  M.toast({
+    html: "Back online",
+    classes: "green"
+  });
+});
+
+window.addEventListener("offline", () => {
+  $(".offline").show();
+  Swal.fire('You are offline now!', 'Please check your internet connections!', 'error');
+});

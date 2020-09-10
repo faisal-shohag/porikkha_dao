@@ -563,7 +563,7 @@ localStorage.getItem("mode");
 
 
 window.addEventListener("online", () => {
-  $(".offline").hide();
+  //$(".offline").hide();
 $('.swal2-confirm').click();
   M.toast({
     html: "Back online",
@@ -572,8 +572,8 @@ $('.swal2-confirm').click();
 });
 
 window.addEventListener("offline", () => {
-  $(".offline").show();
-  Swal.fire('You are offline now!', 'Please check your internet connections!', 'error');
+  //$(".offline").show();
+  Swal.fire('You are offline now!', 'Please check your internet connections!', 'info');
 });
 
 // moment js for time counting

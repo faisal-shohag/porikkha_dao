@@ -39,6 +39,15 @@ if (localtoken != null) {
   });
 
 
+  //Exam count
+
+  db.ref('exams').on('value', snap=>{
+    var arr = [];
+    snap.forEach(item=>{
+     arr.push(item.val()[0].creator);
+    })
+    $('#other-count').html(`${arr.length}`);
+  })
 
 
 
@@ -562,8 +571,11 @@ $('.ntfs-clear').click(function(){
 localStorage.getItem("mode");
 
 
+
 window.addEventListener("online", () => {
+
   //$(".offline").hide();
+  db.ref('hscUsers/'+ localStorage.getItem('token') + '/status').set({state: 'online'});
 $('.swal2-confirm').click();
   M.toast({
     html: "Back online",
@@ -572,7 +584,7 @@ $('.swal2-confirm').click();
 });
 
 window.addEventListener("offline", () => {
-  //$(".offline").show();
+  db.ref('hscUsers/'+ localStorage.getItem('token') + '/status').set({state: 'offline'});
   Swal.fire('You are offline now!', 'Please check your internet connections!', 'info');
 });
 

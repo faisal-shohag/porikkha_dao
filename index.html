@@ -5,15 +5,21 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>পরীক্ষা দাও</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" integrity="sha512-c42qTSw/wPZ3/5LBzD+Bw5f7bSF2oxou6wEb+I/lqeaKV5FDIfMvvRp772y4jcJLKuGUOpbJMdg/BTl50fJYAw==" crossorigin="anonymous" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Google+Sans" as="style" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-  <link rel="stylesheet" href="./icofont/icofont.min.css">
+  <link rel="stylesheet" href="./icofont/icofont.min.css" />
   <link rel="stylesheet" href="./index.css" />
   <link rel="stylesheet" href="./lg-rg.css" />
+  <link rel="stylesheet" href="./live.css" />  
+
+  
 </head>
 
 <body>
+
+
 
   <div class="top-fixed-bar">
     <div class="user-info-wrapper">
@@ -170,51 +176,73 @@
       </svg>
     </div>
 
+    <!-- Live exam -->
+
+    <div class="liveExams">
+      <div class="upcoming">
+        <div class="up">Upcoming Live Exam(MCQ)</div>
+        <div class="live-subject">...</div>
+        <div class="live-details">...</div>
+        <div class="up-timer"></div>
+        <div class="attend"></div>
+      </div>
+
+    </div>
+
+
     <!-- MENU LIST -->
     <div class="menu-head">
       <span class="icofont-school-bag"></span>
-      <span class="menu-text-prac"> বিষয় সমূহ</span>
+      <span class="menu-text-prac animate__animated animate__fadeInLeft"> বিষয় সমূহ</span>
       <div class="menu-list">
 
         <a class="modal-trigger" href="#">
           <div class="menu-list-item">
             <div class="menu-list-icon"><span class="icofont-read-book"></span></div>
             <div class="menu-list-icon-text">বাংলা</div>
+          </div>
         </a>
-      </div>
+     
 
-
+        <a class="modal-trigger" href="#">
       <div class="menu-list-item">
         <div class="menu-list-icon"><span class="icofont-abc"></span></div>
         <div class="menu-list-icon-text">English</div>
       </div>
+    </a>
 
-
-
+    <a class="modal-trigger" href="#">
       <div class="menu-list-item">
         <div class="menu-list-icon"><span class="icofont-globe-alt"></span></div>
         <div class="menu-list-icon-text">সাধারণ জ্ঞান</div>
       </div>
+      </a>
 
+      <a class="modal-trigger" href="#">
       <div class="menu-list-item">
         <div class="menu-list-icon"><span class="icofont-electron"></span></div>
         <div class="menu-list-icon-text">বিজ্ঞান</div>
       </div>
-
+       </a>
+       <a class="modal-trigger" href="#">
       <div class="menu-list-item">
         <div class="menu-list-icon"><span class="icofont-brainstorming"></span></div>
         <div class="menu-list-icon-text">আইকিউ</div>
       </div>
+      </a>
 
       <a id="exams" class="modal-trigger menu-sub-click" href="#menu-list-modal">
         <div class="menu-list-item">
           <div class="menu-list-icon"><span class="icofont-book-alt"></span></div>
           <div class="menu-list-icon-text">অন্যান্য</div>
+          <div id="other-count" class="menu-list-exam-count">...</div>
         </div>
       </a>
-
+    
+      </div>
     </div>
-  </div>
+
+
 
   <!-- Menu List Modal-->
   <div class="eachExamModal">
@@ -447,6 +475,7 @@
 
   <script src="./index.js"></script>
   <script src="./lg-rg.js"></script>
+  <script src="./liveExams.js"></script>
 
   <script>
     $(".dark-toggle").on("click", function () {

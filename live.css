@@ -1,0 +1,39 @@
+
+
+.liveExams{
+    text-align: center;
+    position: relative;
+    margin-bottom: 10px;
+
+}
+
+.upcoming{
+    padding: 5px;
+    box-shadow: 0 1px 8px rgba(0,0,0,.2);
+    padding-bottom: 10px;
+}
+
+.up{
+    font-weight: bold;
+    color: var(--primary);
+    
+    /* text-align: left; */
+    /* text-decoration: underline; */
+}
+
+.live-subject{
+    font-size: 16px;
+    color: var(--warning);
+    font-weight: bold;
+}
+
+.live-details{
+    font-weight: bold;
+    font-size: 13px;
+}
+
+#t{
+    font-size: 15px;
+    color: var(--danger);
+    font-weight: bold;
+}

@@ -1,4 +1,4 @@
-const exams = db.ref("exams");
+
 $('.top-fixed-bar').hide();
 $(".after-login").hide(); //hide after login html contents
 var localphone = localStorage.getItem("phone"),
@@ -25,10 +25,10 @@ if (localtoken != null) {
 
       if(snap.val().ntfStatus.active===true){
         $('.ntfStatus').addClass('ntf-active');
-        $('.ntf').addClass('ntf-status');
+        $('.ntf').addClass('animate__animated animate__swing animate__infinite	infinite');
       }else{
         $('.ntfStatus').removeClass('ntf-active');
-        $('.ntf').removeClass('ntf-status');
+        $('.ntf').removeClass('animate__animated animate__swing animate__infinite	infinite');
       }
 
     localStorage.setItem("username", snap.val().username);
@@ -41,7 +41,7 @@ if (localtoken != null) {
 
   //Exam count
 
-  db.ref('exams').on('value', snap=>{
+  db.ref('others').on('value', snap=>{
     var arr = [];
     snap.forEach(item=>{
      arr.push(item.val()[0].creator);
@@ -56,7 +56,7 @@ if (localtoken != null) {
 
   //Showing Notifications
 
-  db.ref("hscUsers/" + localtoken + '/notifications').on('value', snap=>{
+  db.ref("hscUsers/" + localtoken + '/notifications').on('value', snap=> {
     document.querySelector('.ntf-list').innerHTML = '';
     document.querySelector('.no-ntfs').innerHTML = '';
  var ntfsData = [];
@@ -257,9 +257,11 @@ $('.ntfs-clear').click(function(){
   var examToken = "";
   var minusMark = 0;
   var examLength = 0;
+  var subjectExam = '';
   $(document).on("click", ".exam-card", function () {
     var key = $(this)[0].id;
     var sub_name = $(this)[0].classList[1];
+    subjectExam = sub_name;
     examToken = key;
     var exam = [];
     var ans = [];
@@ -267,12 +269,10 @@ $('.ntfs-clear').click(function(){
     var eachExamRef = db.ref(sub_name + "/" + key);
     eachExamRef.once("value", (snap) => {
       $(".ld-exam-name").html(`${snap.val()[0].title}`);
-      $(".title").html(`${
-        snap.val()[0].title
-      } <div class="exam-timer"> <div id="timer">--:--</div> <small class="red-text warn"></small></div
-        
-        <div class="exam-menu">
-        <a class="modal-trigger ld-open" href="#leaderboard"><div class="ld"><span class="material-icons">format_list_numbered_rtl</span></div></a>
+      $(".title").html(`${snap.val()[0].title} 
+      <div class="exam-timer"> <div id="timer">--:--</div> <small class="red-text warn"></small></div>
+      <div class="exam-menu">
+      <a class="modal-trigger ld-open" href="#leaderboard"><div class="ld"><span class="material-icons">format_list_numbered_rtl</span></div></a>
       </div>
         
         `);
@@ -287,7 +287,7 @@ $('.ntfs-clear').click(function(){
     $(document).on("click", ".ld-open", function () {
       $(".ld-content").html("");
       const ldRef = db
-        .ref("exams/" + examToken + "/0/results")
+        .ref(subjectExam + "/" + examToken + "/0/results")
         .orderByChild("mark");
       var ld_count = 1;
       var ldData = [];
@@ -507,7 +507,7 @@ $('.ntfs-clear').click(function(){
           });
 
           //score sending to Leaderboard
-          resultRef = db.ref("exams/" + examToken + "/0/results");
+          resultRef = db.ref(subjectExam + "/"  + examToken + "/0/results");
           resultRef.on("value", (snap) => {
             var foundInld = false;
             snap.forEach((item) => {

@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exam App</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Google+Sans"
+      as="style"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./index.css" />
+
+    <style>
+      body {
+        padding: 30px;
+        background: #222;
+        color: #fff;
+      }
+
+      .card {
+        color: #000;
+        padding: 10px;
+      }
+      label span {
+        color: #222;
+      }
+
+      .correct {
+        background-color: green;
+        padding: 5px;
+        border-radius: 3px;
+        color: #fff;
+      }
+
+      .wrong {
+        background-color: red;
+        padding: 5px;
+        border-radius: 3px;
+        color: #fff;
+      }
+
+      #exam-details {
+        border: 3px solid yellowgreen;
+        padding: 10px;
+        border-radius: 10px;
+      }
+
+      input {
+        color: #fff;
+      }
+
+      textarea {
+        color: #fff;
+        height: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <button class="btn view-set-q">Toogle</button>
+
+    <div style="display: none" class="ntf-sent">
+      <form id="notifications">
+        <div class="input-field">
+          <textarea
+            type="text"
+            id="ntf-text"
+            name="ntf"
+            placeholder="Write notification here..."
+            required
+          ></textarea>
+        </div>
+        <button class="btn">Sent</button>
+      </form>
+    </div>
+
+    <div class="exam-set">
+      <form id="exam-details">
+        <center><h5>Details</h5></center>
+      Start Time
+        <div class="input-field">
+            <input type="text" id="startTime" name="startTime" value="Sep 20 2020, 20:00:00" placeholder="Sep 20 2020, 20:00:00" required />
+            <label for="startTime"></label>
+          </div>
+
+          End Time
+
+          <div class="input-field">
+            <input type="text" id="endTime" name="endTime" value="Sep 20 2020, 22:00:00" placeholder="Sep 20 2020, 22:00:00" required />
+            <label for="startTime"></label>
+          </div>
+        
+        <div class="input-field col s12">
+          <select name="type">
+            <option value="" disabled selected>Choose your option</option>
+            <option value="1">Live</option>
+            <option value="2">Model Test</option>
+            <option value="3">Normal</option>
+          </select>
+          <label>Exam Type</label>
+        </div>
+
+        <div class="input-field col s12">
+          <select name="sub">
+            <option value="" disabled selected>Choose a subject</option>
+            <option value="4">For Model Test</option>
+            <option value="5">Bangla 1st Paper</option>
+            <option value="6">Agriculture</option>
+            <option value="7">Islamic History</option>
+            <option value="8">Economics</option>
+            <option value="9">Others</option>
+          </select>
+          <label>Subject</label>
+        </div>
+
+        <div class="input-field">
+          <input type="text" id="title" name="title" required />
+          <label for="title">Title</label>
+        </div>
+
+        <div class="input-field">
+          <input type="text" id="time" name="time" required />
+          <label for="time">Time</label>
+        </div>
+
+        <div class="input-field">
+          <input type="text" id="nq" name="nq" required />
+          <label for="nq">Number of Questions</label>
+        </div>
+
+        <div class="input-field">
+          <input type="text" id="score" name="score" required />
+          <label for="score">Total Score</label>
+        </div>
+
+        <div class="input-field">
+          <input type="text" id="forWrong" name="forWrong" required />
+          <label for="forWrong">Negative mark for each question</label>
+        </div>
+
+        <div class="input-field">
+          <input type="text" id="creator" name="creator" required />
+          <label for="creator">Creator</label>
+        </div>
+
+        <center><button class="btn" type="submit">Push Details</button></center>
+      </form>
+
+      <div class="details"></div>
+
+      <div class="questions"></div>
+
+      <!-- Questions form -->
+
+      <form id="questions-form">
+        <div class="input-field">
+          <input type="text" id="q" name="q" required />
+          <label for="q">Question</label>
+        </div>
+
+        <div class="input-field">
+          <input type="text" id="a" name="a" required />
+          <label for="a">Option 1</label>
+        </div>
+
+        <div class="input-field">
+          <input type="text" id="b" name="b" required />
+          <label for="b">Option 2</label>
+        </div>
+
+        <div class="input-field">
+          <input type="text" id="c" name="c" required />
+          <label for="c">Option 3</label>
+        </div>
+
+        <div class="input-field">
+          <input type="text" id="d" name="d" required />
+          <label for="d">Option 4</label>
+        </div>
+
+        <div class="input-field">
+          <input type="text" id="ans" name="ans" required />
+          <label for="ans">Answer Index</label>
+        </div>
+
+        <div class="input-field">
+          <input type="text" id="expln" name="expln" required />
+          <label for="expln">Solution & Explanations</label>
+        </div>
+
+        <center>
+          <button class="btn" type="submit">Push Question</button>
+        </center>
+      </form>
+      <br />
+      <div class="push_db">
+        <button class="btn">OK?</button>
+      </div>
+      <br />
+      <button style="display: none" class="btn" id="toDatabase">
+        Push to Database
+      </button>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9.17.2/dist/sweetalert2.all.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-storage.js"></script>
+    <script>
+      $(".dropdown-trigger").dropdown();
+      $(document).ready(function () {
+        $("select").formSelect();
+      });
+
+      $(".push_db").click(function () {
+        $("#toDatabase").toggle();
+      });
+
+      $(".view-set-q").click(function () {
+        $(".ntf-sent").toggle();
+        $(".exam-set").toggle();
+      });
+      // Your web app's Firebase configuration
+      var firebaseConfig = {
+        apiKey: "AIzaSyAx0Oc2oSJA2anwfHseJZqwuAdnojI6jvY",
+        authDomain: "live-exam-7c7a8.firebaseapp.com",
+        databaseURL: "https://live-exam-7c7a8.firebaseio.com",
+        projectId: "live-exam-7c7a8",
+        storageBucket: "live-exam-7c7a8.appspot.com",
+        messagingSenderId: "577429915483",
+        appId: "1:577429915483:web:4fafe4a69bab7b1b063c7e",
+        measurementId: "G-6834S6GV1W",
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      firebase.analytics();
+      var store = firebase.firestore();
+      var db = firebase.database();
+      var storage = firebase.storage();
+    </script>
+    <script>
+      var getServerTime = function (cb) {
+        this.db.ref(".info/serverTimeOffset").once("value", function (snap) {
+          var offset = snap.val();
+
+          // Get server time by milliseconds
+          cb(new Date().getTime() + offset);
+        });
+      };
+
+      var serverTime;
+      getServerTime(function (now) {
+        serverTime = now;
+      });
+
+      // notification sending
+
+      const notification = document.querySelector("#notifications");
+      db.ref("hscUsers").once("value", (snap) => {
+        var usersKey = [];
+        snap.forEach((element) => {
+          usersKey.push(element.key);
+        });
+
+        notification.addEventListener("submit", (e) => {
+          e.preventDefault();
+          var ntfTime = serverTime;
+          var ntf = notification.ntf.value;
+          //console.log(notification.ntf.value);
+          var data = {
+            notification: ntf,
+            time: ntfTime,
+          };
+          var ntfActive = {
+            active: true,
+          };
+
+          for (let n = 0; n < usersKey.length; ++n) {
+            db.ref("hscUsers/" + usersKey[n] + "/notifications").push(data);
+            db.ref("hscUsers/" + usersKey[n] + "/ntfStatus").set(ntfActive);
+          }
+        });
+      });
+
+      const details = document.querySelector("#exam-details"),
+        question = document.querySelector("#questions-form");
+
+      var selectors = {
+        1: "live",
+        2: "model",
+        3: "normal",
+        4: "model",
+        5: "bangla_first",
+        6: "agriculture",
+        7: "islamic_history",
+        8: "economics",
+        9: "others",
+      };
+      var exam = [];
+      var type = "";
+      var subject = "";
+      var title = "";
+      var examsRef;
+      //   Exam details form
+
+      details.addEventListener("submit", (e) => {
+        e.preventDefault();
+        type = details.type.value;
+        subject = details.sub.value;
+        var examDetails = {
+          title: details.title.value,
+          time: details.time.value,
+          nq: details.nq.value,
+          score: details.score.value,
+          forWrong: details.forWrong.value,
+          creator: details.creator.value,
+          startTime: details.startTime.value,
+          endTime: details.endTime.value,
+          type: selectors[type],
+          sub: selectors[subject],
+        };
+
+        // console.log(examDetails)
+
+        console.log(
+          "type: " + selectors[type] + " | sub: " + selectors[subject]
+        );
+        if (type === "") {
+          Swal.fire("Empty Field!", "Please select exam type!", "info");
+        } else if (subject === "") {
+          Swal.fire("Empty Field!", "Please select a subject!", "info");
+        } else {
+          exam.push(examDetails);
+          console.log(exam);
+          $(".details").html(`
+       <div class="card">
+       <h5>${exam[0].title}</h5>
+       <small>Time: ${exam[0].time}</small><br>
+       <small>Number of Q: ${exam[0].nq}</small><br>
+       <small>Score: ${exam[0].score}</small><br>
+       <small>For Wrong Ans: -${exam[0].forWrong}</small><br>
+       <strong>Creator: ${exam[0].creator}</strong>
+       </div>
+       
+       `);
+          $("#exam-details").hide();
+
+          title = exam[0].title;
+        }
+        
+        if(selectors[type] === "normal") examsRef = db.ref(selectors[subject]+'/');
+        else examsRef = db.ref(selectors[type] + "/");
+      });
+
+
+
+     
+
+      // Questions adding form
+
+      var k = 0;
+      question.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        var examQuestion = {
+          q: question.q.value,
+          options: [
+            question.a.value,
+            question.b.value,
+            question.c.value,
+            question.d.value,
+          ],
+          ans: question.ans.value,
+          expln: question.expln.value,
+        };
+        k = k + 1;
+        exam.push(examQuestion);
+        console.log(exam);
+        var html = `
+            <div class="card">
+                <div class="q">${k}. ${question.q.value}</div>
+   <div class="options">
+       <label>
+           <input id="1"  type="radio" name="${k}">
+           <span>${question.a.value}</span>
+       </label><br>
+       <label>
+        <input id="2" type="radio" name="${k}">
+        <span>${question.b.value}</span>
+    </label><br>
+
+    <label>
+        <input id="3" type="radio" name="${k}">
+        <span>${question.c.value}</span>
+    </label><br>
+
+    <label>
+        <input id="4" type="radio" name="${k}">
+        <span>${question.d.value}</span>
+    </label>
+   </div>
+   <small>Ans: ${question.ans.value}</small><br>
+   <small>Expln: ${question.expln.value}</small>
+            </div>
+            `;
+
+        document.querySelector(".questions").innerHTML += html;
+        question.reset();
+      });
+
+      $("#toDatabase").on("click", function () {
+        examsRef.push(exam);
+
+      });
+
+      /*
+
+    var exam = {
+            "details": { 
+            "title": "title", 
+            "time": "20min",
+            "totalQ": "20",
+            "score": 20,
+            "forWrong": 0.25,
+            "creator": "Admin"
+            },
+            "questions": [
+                {
+                "q": "<div style='color: red;'>a<sup>2</sup>+b<sup>2</sup> = ?</div>",
+                "desc": " ",
+                "options": ["A", "B", "C", "D"],
+                "ans": "B",
+                "expln": "B is answer"
+                },
+
+                {
+                "q": "<div style='color: green;'>(a+b)<sup>2</sup> = ?</div>",
+                "desc": " ",
+                "options": ["A", "B", "C", "D"],
+                "ans": "A",
+                "expln": "A is answer"
+                },
+
+                {
+                "q": "<div style='color: orange;'>a<sup>2</sup>+b<sup>2</sup> = ?</div>",
+                "desc": " ",
+                "options": ["A", "B", "C", "D"],
+                "ans": "D",
+                "expln": "D is answer"
+                }
+            ],
+            "ans": ["2", "1", "4"]
+        }
+
+
+
+
+ var ans = ['2', '1', '4'];
+var correctAns = ['1', '2', '3', '4'];
+
+
+
+for(let i=0; i<exam.questions.length; ++i){
+           var name = (i+1).toString();
+           console.log(name)
+        //    correctAns.push(res.exams[0].questions[i].ans);
+
+            var html = `
+            <div class="question">
+    <div class="q">${exam.questions[i].q}</div>
+   <div class="options">
+       <label>
+           <input id="1" type="radio" name="${name}">
+           <span>${exam.questions[i].options[0]}</span>
+       </label><br>
+       <label>
+        <input id="2" type="radio" name="${name}">
+        <span>${exam.questions[i].options[1]}</span>
+    </label><br>
+
+    <label>
+        <input id="3" type="radio" name="${name}">
+        <span>${exam.questions[i].options[2]}</span>
+    </label><br>
+
+    <label>
+        <input id="4" type="radio" name="${name}">
+        <span>${exam.questions[i].options[3]}</span>
+    </label>
+   </div>
+</div>
+
+            `
+            document.querySelector('.questions').innerHTML += html;
+
+        }
+
+
+
+  
+   //var correctAns = ["Human", "Yellow"];
+    var cr = 0;
+    var wa = 0;
+    $("input[type='radio']").on('click', function(){
+        // console.log($(this)[0].parentNode)
+       // console.log($(this)[0].name)
+
+        // console.log(ans)
+        // console.log(correctAns)
+
+        $("input[type=radio][name="+this.name+"]").prop('disabled', true);
+
+        if($(this)[0].id === ans[parseInt($(this)[0].name)-1]){
+            $(this)[0].parentNode.classList.add("correct");
+            // console.log('Correct')
+            cr++;
+           
+        }
+        else{
+            $(this)[0].parentNode.classList.add("wrong");
+            wa++;
+        }
+
+
+
+    });
+
+$('#sub').on('click', function(){
+    var questions = document.querySelectorAll('.question')
+    //console.log(questions)
+
+    for(let i=0; i<questions.length; ++i){
+        var ans = `<div class="soln"> ${correctAns[i]} </div>`;
+        $(questions[i]).append(ans);
+    }
+
+$('.score').html(`Correct: ${cr}<br> Wrong: ${wa}`);
+var ansSheet = document.querySelector('.questions');
+$('.ansSheet').append(ansSheet);
+
+})
+
+*/
+      /*
+$(function(){
+        $.get('./exam-model.json', function(){})
+        .done(function(res){
+            console.log(res);
+            ans = res.exams[0].ans;
+        for(let i=0; i<res.exams[0].questions.length; ++i){
+           var name = (i+1).toString();
+           console.log(typeof name)
+        //    correctAns.push(res.exams[0].questions[i].ans);
+
+            var html = `
+            <div class="question">
+    <div class="q">${res.exams[0].questions[i].q}</div>
+   <div class="options">
+       <label>
+           <input id="1" type="radio" name="${name}">
+           <span>${res.exams[0].questions[i].options[0]}</span>
+       </label><br>
+       <label>
+        <input id="2" type="radio" name="${name}">
+        <span>${res.exams[0].questions[i].options[1]}</span>
+    </label><br>
+
+    <label>
+        <input id="3" type="radio" name="${name}">
+        <span>${res.exams[0].questions[i].options[2]}</span>
+    </label><br>
+
+    <label>
+        <input id="4" type="radio" name="${name}">
+        <span>${res.exams[0].questions[i].options[3]}</span>
+    </label>
+   </div>
+</div>
+
+            `
+            document.querySelector('.questions').innerHTML += html;
+
+        }
+        })
+    });
+    */
+    </script>
+  </body>
+</html>

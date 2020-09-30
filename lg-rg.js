@@ -155,6 +155,11 @@ $(document).ready(function () {
                       html: "আপলোড হয়েছে!",
                       classes: "rounded green toast",
                     });
+                    var myDate = new Date();
+                    var myEpoch = myDate.getTime()/1000.0;
+                    myEpoch = myEpoch.toString().split('.');
+                    myEpoch = myEpoch.join('');
+                    myEpoch = parseInt(myEpoch);
                     var registrationData = {
                       username: username,
                       phone: phone,
@@ -162,6 +167,15 @@ $(document).ready(function () {
                       district: district,
                       avatar: downloadURL,
                       score: 0,
+                      notifications: {
+                        newkey1235: {
+                          notification: 'Welcome to Porikkha dao!',
+                          time: myEpoch
+                        }
+                      },
+                      ntfStatus: {
+                        active: true
+                      }
                     };
                     users.push(registrationData);
                     $(".loading").hide();
@@ -172,6 +186,8 @@ $(document).ready(function () {
                                    <center><a  class="btn purple lg-reload"> এখন লগইন করো!</a></center>
                                    `);
                   });
+
+                 
               }
             );
             // uploading photo end

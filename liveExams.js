@@ -1,10 +1,28 @@
+// localStorage.removeItem('token');
+
 if (localtoken != null) {
 
 db.ref('live').on('value', snap=>{
-    $('.live-subject').text(snap.val().title);
-    $('.live-details').text(snap.val().ques + ' Questions | ' + snap.val().marks+' Marks | ' + 'Negative: ' + snap.val().negative);
-var countDownDate = new Date(snap.val().startTime).getTime();
+ if(snap.val().title === null){
+     $('.upcoming').html(`<i>কোন লাইভ এক্সাম নেই!</i>`);
+ }else if(snap.val()[0].ended.state === true){
+  $('.up').html(`<div class="live animate__animated animate__flip" style="color: var(--danger);">শেষ!</div>`);
+  $('.up-timer').html(``);
+  $('.live-subject').text(snap.val()[0].title);
+  $('.live-details').text(snap.val()[0].nq + ' টি প্রশ্ন | ' + snap.val()[0].score+' মার্কস | ' + snap.val()[0].time + ' মিনিট | ' + 'নেগেটিভ: ' + snap.val()[0].forWrong);
+ // $('.live-details').text('');
+  $('.attend').html(`<small style="color: red">${snap.val()[0].resultText}</span>`);
+ }
+ else
+{
+  var liveExamName = snap.val()[0].title;
+  $('#liveTitle').html(`${liveExamName}`)
+    $('.live-subject').text(snap.val()[0].title);
+    $('.live-details').text(snap.val()[0].nq + ' টি প্রশ্ন | ' + snap.val()[0].score+' মার্কস | ' + snap.val()[0].time + ' মিনিট | ' + 'নেগেটিভ: ' + snap.val()[0].forWrong);
+var countDownDate = new Date(snap.val()[0].startTime).getTime();
+
 $('.up-timer').html('');
+
 var x = setInterval(function() {
   var now = new Date().getTime();
   var distance = countDownDate - now;
@@ -22,44 +40,45 @@ var x = setInterval(function() {
   } else{
     $('.up-timer').html(`<span id="t">${addZero(days)}</span> day <span id="t">${addZero(hours)}</span> hr <span id="t">${addZero(minutes)}</span> min <span id="t">${addZero(seconds)}</span> sec`);
   }
+
 function addZero(num){if(num<10) return num = '0'+ num; else return num;}
 
   if (distance < 0) {
     clearInterval(x);
-    $('.up').html(`<div class="live animate__animated animate__flip" style="color: var(--danger);">Running Exam</div>`);
-//     setTimeout(function(){
-//     $('.live').removeClass('animate__flip');
-//     $('.live').addClass('animate__flash');
-// }, 2000);
+    $('.up').html(`<div class="live animate__animated animate__flip" style="color: var(--danger);">পরীক্ষা চলছে</div>`);
+
+
     $('.live-details').addClass('animate__animated animate__flip');
-    $('.live-details').text('Remaining');
-    $('.up-timer').html(`<div class="animate__animated animate__fadeIn">Started</div>`);
+    $('.live-details').text('সময় বাকি');
+   // $('.up-timer').html(`<div class="animate__animated animate__fadeIn">Started</div>`);
 
    
-    db.ref('liveUsers').on('value', snap=>{
+    db.ref('live/0/users').on('value', snap=>{
         let found = false;
         snap.forEach(element => {
             if(element.val().phone === localStorage.getItem('phone')){
-                $('.attend').html(`<button type="disabled" style="background: gray;"  id="startLiveExam" class="btn">You have participated!</div>`);
+                $('.attend').html(`<button type="disabled" style="background: gray;"  id="startLiveExam" class="btn">অংশগ্রহন করেছিলে!</div>`);
                 found = true;
             }
         });
 
         if(!found){
-            $('.attend').html(`<button  id="startLiveExam" class="btn purple">Participate</div>`);
+            $('.attend').html(`<button  id="startLiveExam" class="btn purple">অংশগ্রহন</div>`);
 
             $('#startLiveExam').click(function(){  
                 Swal.fire({
-                 title: 'Are you sure?',
+                 title: `তুমি কি নিশ্চিত?`,
+                 text: `তুমি দ্বিতীয়বার অংশ নিতে পারবে না!`,
                  showDenyButton: true,
                  showCancelButton: true,
-                 confirmButtonText: `Yes`,
-                 denyButtonText: `Don't save`,
+                 confirmButtonText: `হ্যাঁ!`,
+                 cancelButtonText: `না!`,
+                 denyButtonText: `না!`,
                }).then((result) => {
                  /* Read more about isConfirmed, isDenied below */
                  if (result.isConfirmed) {
-                   db.ref('liveUsers').push({phone: localStorage.getItem('phone')});
-             
+                   //db.ref('live/0/users').push({phone: localStorage.getItem('phone')});
+                   $('.liveExam').modal('open');    
                  } else if (result.isDenied) {
                    Swal.fire('Changes are not saved', '', 'info')
                  }
@@ -70,7 +89,7 @@ function addZero(num){if(num<10) return num = '0'+ num; else return num;}
     
   
    
-var countDownDatey = new Date(snap.val().endTime).getTime()
+var countDownDatey = new Date(snap.val()[0].endTime).getTime()
   var y = setInterval(function() {
     var now = new Date().getTime();
     var distancey = countDownDatey - now;
@@ -80,26 +99,35 @@ var countDownDatey = new Date(snap.val().endTime).getTime()
     var secondsy = Math.floor((distancey % (1000 * 60)) / 1000);
   
     if(daysy === 0 && hoursy === 0 && minutesy === 0){
+      
       $('.up-timer').html(`<div class="animate__animated animate__flip" id="t">${addZero(secondsy)}</div>`);
+      $('#timerLive').html(`<div  id="t">${addZero(secondsy)}</div>`);
+
     }else if(daysy === 0 && hoursy === 0){
       $('.up-timer').html(`<span id="t">${addZero(minutesy)}</span> min <span id="t">${addZero(secondsy)}</span> sec`);
+      $('#timerLive').html(`<span id="t">${addZero(minutesy)}</span> min <span id="t">${addZero(secondsy)}</span> sec`);
     } else if(daysy === 0){
       $('.up-timer').html(`<span id="t">${addZero(hoursy)}</span> hr <span id="t">${addZero(minutesy)}</span> min <span id="t">${addZero(secondsy)}</span> sec`);
+      $('#timerLive').html(`<span id="t">${addZero(hoursy)}</span> hr <span id="t">${addZero(minutesy)}</span> min <span id="t">${addZero(secondsy)}</span> sec`);
     } else{
       $('.up-timer').html(`<span id="t">${addZero(daysy)}</span> day <span id="t">${addZero(hoursy)}</span> hr <span id="t">${addZero(minutesy)}</span> min <span id="t">${addZero(seconds)}</span> sec`);
+      $('#timerLive').html(`<span id="t">${addZero(daysy)}</span> day <span id="t">${addZero(hoursy)}</span> hr <span id="t">${addZero(minutesy)}</span> min <span id="t">${addZero(seconds)}</span> sec`);
     }
   function addZero(numy){if(numy<10) return numy = '0'+ numy; else return numy;}
-  $('.up').html(`<div class="animate__animated animate__pulse" style="color: var(--danger);">Running Exam</div>`);
+  $('.up').html(`<div class="animate__animated animate__pulse" style="color: var(--danger);">পরীক্ষা চলছে</div>`);
     if (distancey < 0) {
       clearInterval(y);
-      $('.up').html(`<div class="live animate__animated animate__flip" style="color: var(--danger);">Ended</div>`);
+      db.ref('live/0/ended').set({state: true});
+      Swal.fire( {icon: 'success', text : 'শেষ!'});
+      $('.liveExam').modal('close'); 
+      $('.up').html(`<div class="live animate__animated animate__flip" style="color: var(--danger);">শেষ!</div>`);
       setTimeout(function(){
       $('.live').removeClass('animate__flip');
       $('.live').addClass('animate__flash');
   }, 2000);
       $('.up-timer').html(``);
       $('.live-details').text('');
-      $('.attend').remove();
+     // $('.attend').remove();
     }
 
     
@@ -110,6 +138,8 @@ var countDownDatey = new Date(snap.val().endTime).getTime()
   
 
 }, 1000);
+
+ }
 
 });
 

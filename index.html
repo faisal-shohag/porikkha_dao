@@ -28,15 +28,15 @@
         <div class="username"></div>
         <div class="ranks">
           <div class="material-icons">military_tech</div>
-          <div class="score exam-score">---</div>
+          <div class="score exam-score">0</div>
           <div class="material-icons">verified</div>
           &nbsp;
-          <div class="score exam-count">---</div>
+          <div class="score exam-count">0</div>
         </div>
       </div>
     </div>
     <a class="modal-trigger ntf-trigger " href="#notifications-modal">
-      <div class="icofont-notification ntf "></div>
+     <div class="icofont-notification ntf"></div>
     </a>
     <div class="ntfStatus"></div>
     <a href="#" data-target="slide-out" class="sidenav-trigger">
@@ -180,9 +180,9 @@
 
     <div class="liveExams">
       <div class="upcoming">
-        <div class="up">Upcoming Live Exam(MCQ)</div>
-        <div class="live-subject">...</div>
-        <div class="live-details">...</div>
+        <div class="up">আগামী পরীক্ষা (Live MCQ)</div>
+        <div class="live-subject"></div>
+        <div class="live-details"></div>
         <div class="up-timer"></div>
         <div class="attend"></div>
       </div>
@@ -231,7 +231,7 @@
       </div>
       </a>
 
-      <a id="exams" class="modal-trigger menu-sub-click" href="#menu-list-modal">
+      <a id="others" class="modal-trigger menu-sub-click" href="#menu-list-modal">
         <div class="menu-list-item">
           <div class="menu-list-icon"><span class="icofont-book-alt"></span></div>
           <div class="menu-list-icon-text">অন্যান্য</div>
@@ -289,6 +289,33 @@
     </div>
   </div>
   <!-- Each Exam modal ends -->
+
+
+  <!-- Live exam modal -->
+  <div class="eachExamModal">
+    <div id="liveExam" class="modal liveExam modal-fixed-footer">
+      <div class="modal-content">
+        <div class="titleLive">
+          <div id="liveTitle"></div>
+          <div class="exam-timer"> <div id="timerLive"></div> <small class="red-text warn"></small></div>
+        </div>
+
+        <div class="resultLive"></div>
+        <div class="after-endLive"></div>
+        <form class="questionsLive"></form>
+      </div>
+      <div class="modal-footer">
+        <div class="markedCount"></div>
+        <button class="waves-effect waves-light btn purple" id="subLive">
+          সাবমিট করো!
+        </button>
+        <a href="#!" class="modal-close waves-effectmodal-footer waves-green btn-flat cancel-exam">
+          <div class="material-icons back">close</div>
+        </a>
+      </div>
+    </div>
+  </div>
+  <!-- Live Exam modal ends -->
 
 
 

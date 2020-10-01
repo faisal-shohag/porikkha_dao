@@ -18,7 +18,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./index.css" />
-
+    <link rel="stylesheet" href="./css/dateTimePicker.css" />
     <style>
       body {
         padding: 30px;
@@ -85,18 +85,13 @@
     <div class="exam-set">
       <form id="exam-details">
         <center><h5>Details</h5></center>
+        
       Start Time
-        <div class="input-field">
-            <input type="text" id="startTime" name="startTime" value="Sep 20 2020, 20:00:00" placeholder="Sep 20 2020, 20:00:00" required />
-            <label for="startTime"></label>
-          </div>
+      <input type="text" name="start" id="datetimepicker_dark"/>
 
           End Time
 
-          <div class="input-field">
-            <input type="text" id="endTime" name="endTime" value="Sep 20 2020, 22:00:00" placeholder="Sep 20 2020, 22:00:00" required />
-            <label for="startTime"></label>
-          </div>
+          <input type="text" name="end" id="datetimepicker4"/>
         
         <div class="input-field col s12">
           <select name="type">
@@ -219,6 +214,7 @@
     <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-database.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-storage.js"></script>
+    <script src="./js/dateTimePicker.js"></script>
     <script>
       $(".dropdown-trigger").dropdown();
       $(document).ready(function () {
@@ -327,10 +323,13 @@
           score: details.score.value,
           forWrong: details.forWrong.value,
           creator: details.creator.value,
-          startTime: details.startTime.value,
-          endTime: details.endTime.value,
+          startTime: details.start.value,
+          endTime: details.end.value,
           type: selectors[type],
           sub: selectors[subject],
+          ended: {
+            state: false
+          }
         };
 
         // console.log(examDetails)
@@ -422,7 +421,8 @@
       });
 
       $("#toDatabase").on("click", function () {
-        examsRef.push(exam);
+        examsRef.set(exam);
+
 
       });
 

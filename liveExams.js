@@ -77,7 +77,7 @@ function addZero(num){if(num<10) return num = '0'+ num; else return num;}
                }).then((result) => {
                  /* Read more about isConfirmed, isDenied below */
                  if (result.isConfirmed) {
-                   //db.ref('live/0/users').push({phone: localStorage.getItem('phone')});
+                   db.ref('live/0/users').push({phone: localStorage.getItem('phone')});
                    $('.liveExam').modal('open');    
                  } else if (result.isDenied) {
                    Swal.fire('Changes are not saved', '', 'info')
@@ -138,6 +138,133 @@ var countDownDatey = new Date(snap.val()[0].endTime).getTime()
   
 
 }, 1000);
+
+
+//Live exam
+
+var liveAns = [];
+var minusMark = parseInt(snap.val()[0].forWrong);
+var liveExam = snap.val();
+var liveCorrectAns = [];
+$('.questionsLive').html('');
+for (let i = 1; i < liveExam.length; ++i) {
+  liveAns.push(liveExam[i].ans);
+  liveCorrectAns.push(liveExam[i].expln);
+  var html = `
+        <div class="question">
+<div class="q">${i}. ${liveExam[i].q}</div>
+<div class="options">
+   <label>
+       <input id="1" type="radio" name="${i}">
+       <span>${liveExam[i].options[0]}</span>
+   </label><br>
+   <label>
+    <input id="2" type="radio" name="${i}">
+    <span>${liveExam[i].options[1]}</span>
+</label><br>
+
+<label>
+    <input id="3" type="radio" name="${i}">
+    <span>${liveExam[i].options[2]}</span>
+</label><br>
+
+<label>
+    <input id="4" type="radio" name="${i}">
+    <span>${liveExam[i].options[3]}</span>
+</label>
+</div>
+</div>`;
+
+  document.querySelector(".questionsLive").innerHTML += html;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+var liveCR = 0;
+var liveWA = 0;
+var liveMarkedCount = 0;
+var liveExamLength = snap.val().length;
+
+$("input[type='radio']").on("click", function () {
+  $("input[type=radio][name=" + this.name + "]").prop("disabled", true);
+  liveMarkedCount++;
+  if ($(this)[0].id === liveAns[parseInt($(this)[0].name) - 1]) {
+    //$(this)[0].parentNode.classList.add("correct");
+    // console.log('Correct')
+    liveCR++;
+    //indexes.push(parseInt($(this)[0].name)-1);
+  } else {
+   // $(this)[0].parentNode.classList.add("wrong");
+    liveWA++;
+  }
+
+  if (liveMarkedCount === liveExamLength - 1) {
+    $(".liveMarkedCount").html(
+      `<div style="color: var(--success); font-size: 20px; transition: 1s;">${liveMarkedCount}/${
+        liveExamLength - 1
+      }</div>`
+    );
+  } else $(".liveMarkedCount").html(`${liveMarkedCount}/${liveExamLength - 1}`);
+});
+
+$('#subLive').unbind().click(function(){
+ $('#subLive').hide();
+ $(".modal-content").animate({ scrollTop: 0 }, "slow");
+        // var soln;
+        // const questions = document.querySelectorAll(".question");
+        // $(".soln").remove();
+        // for (let i = 0; i < questions.length; ++i) {
+        //   soln = `<div class="soln"> ${liveCorrectAns[i]} </div>`;
+        //   questions[i].innerHTML += soln;
+        // }
+
+      //   $(".resultLive").html(`<div class="result-data">
+      // <div class="score-box cr">${liveCR}</div>
+      // <div class="score-box wa">${liveWA}</div>
+      // <div class="score-box nans">${liveExamLength - 1 - (liveCR + liveWA)}</div>
+      // <div class="score-box mark">${liveCR-(liveWA*minusMark)}</div>
+      // <div class="score-box minus-mark">${liveCR-(liveCR-(liveWA*minusMark))}</div>
+      // </div>`);
+ 
+      $(".questionsLive").addClass("after-endLive");
+
+      const token = localStorage.getItem("token");
+      const userLiveExams = db.ref("hscUsers/" + token + "/liveExams");
+
+      var userLiveExamData = {
+        //examTitle: examTitle,
+        correct: liveCR,
+        mark: liveCR-(liveWA*minusMark),
+        wrong: liveWA,
+        notAns: liveExamLength - 1 - (liveCR + liveWA),
+        total: liveExamLength - 1,
+      };
+
+      userLiveExams.push(userLiveExamData);
+      
+      db.ref('live/0/results/').push({
+        username: localStorage.getItem('username'),
+        correct: liveCR,
+        mark: liveCR-(liveWA*minusMark),
+        wrong: liveWA,
+        notAns: liveExamLength - 1 - (liveCR + liveWA),
+        total: liveExamLength - 1,})
+      console.log(userLiveExamData);
+
+      Swal.fire('তোমার পরীক্ষাটি সাবমিট হয়েছে! ', '', 'success');
+      $('.liveExam').modal('close'); 
+})
+
+
 
  }
 

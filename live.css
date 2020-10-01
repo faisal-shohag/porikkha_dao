@@ -100,3 +100,127 @@
     content: "⏱ ";
     left: 20%;
   }
+
+
+  .questionsLive {
+    position: relative;
+    margin-top: 0px;
+    z-index: 10;
+    margin-top: 50px;
+  }
+  
+  .questionsLive .question {
+    box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.3);
+    padding: 10px;
+    margin-bottom: 5px;
+    width: 100%;
+    border-radius: 5px;
+    border-top: 3px solid var(--purple);
+    background: #fff;
+    margin-bottom: 15px;
+  }
+  .questionsLive .question .q {
+    /* color: #707070; */
+    color: #000;
+    font-size: 17px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .questionsLive .question label span {
+    padding-left: 30px;
+    margin-bottom: 5px;
+  }
+
+  .after-endLive [type="radio"]:not(:checked) + span {
+    border-radius: 3px;
+    border: 1px solid #e7e7e7;
+    height: auto;
+  }
+  
+  .after-endLive [type="radio"]:checked + span {
+    /* padding: 0px; */
+    background: none !important;
+    color: #6610f2;
+    border-radius: 3px;
+    border: 1px solid #e7e7e7;
+    border-radius: 3px;
+    /* border: 1px solid #e7e7e7; */
+    width: 100%;
+    height: auto;
+  }
+
+
+
+.after-endLive .correct {
+    background: var(--success);
+    /* padding: 3px;  */
+    border-radius: 3px;
+    color: #fff; 
+    padding-top: 10px;
+    padding-bottom: 5px; 
+    height: auto;
+    position: relative;
+  }
+  
+  .after-endLive .correct::before {
+  content: '';
+  position: absolute;
+  background: var(--success);
+  height:  100%;
+  width: 100%;
+  
+  }
+  
+  .after-endLive .correct span {
+    color: #fff;
+    height: auto;
+  }
+  
+  .after-endLive .wrong span {
+    color: #fff;
+  }
+  
+  .after-endLive .wrong {
+    background: var(--danger);
+    /* padding: 3px; */
+    border-radius: 3px;
+    color: #fff;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    position: relative;
+  }
+  
+  .after-endLive .wrong::before{
+    content: '';
+    position: absolute;
+    background: var(--danger);
+    height:  100%;
+    width: 100%;
+  }
+  
+  .liveMarkedCount {
+    position: absolute;
+    bottom: 25%;
+    /* font-size: large; */
+    left: 7%;
+    font-weight: bold;
+    transition: 1s;
+  }
+
+  #liveExam .back{
+      position: absolute;
+      top: 20%;
+      right: 10%;
+  }
+  
+  #liveExam .modal-footer {
+    border-top: 1px solid var(--danger);
+    box-shadow: 0px -2px 3px rgba(0, 0, 0, 0.2);
+  }
+
+  #liveExam #subLive {
+    position: absolute;
+    left: 37%;
+    font-weight: bold;
+  }

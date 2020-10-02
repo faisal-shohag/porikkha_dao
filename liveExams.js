@@ -253,6 +253,7 @@ $('#subLive').unbind().click(function(){
       
       db.ref('live/0/results/').push({
         username: localStorage.getItem('username'),
+        avatar: localStorage.getItem('avatar'),
         correct: liveCR,
         mark: liveCR-(liveWA*minusMark),
         wrong: liveWA,

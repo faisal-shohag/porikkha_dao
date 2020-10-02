@@ -1,0 +1,35 @@
+body{
+    font-family: Google Sans, 'kalpurush';
+}
+.details{
+    background: #162447;
+    margin-top: 80px;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.d-title{
+    font-size: 20px;
+    font-weight: bold;
+
+}
+
+
+
+textarea, input{
+    font-family: Google Sans, 'kalpurush';
+}
+
+.select-wrapper input.select-dropdown{
+    font-family: Google Sans, 'kalpurush';
+}
+
+.dropdown-content{
+    background: #222 !important;
+}
+
+.select-dropdown li.disabled, .select-dropdown li.disabled>span, .select-dropdown li.optgroup{
+    color: #7e7e7e;
+}
+

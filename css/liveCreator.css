@@ -33,3 +33,24 @@ textarea, input{
     color: #7e7e7e;
 }
 
+
+.modal{
+    background: #222;
+  }
+  
+  .modal-footer{
+      background: #162447 !important;
+  }
+
+  .modal-footer a{
+      color: #fff;
+  }
+
+
+  #live-details-edit-form small{
+   color: var(--teal);
+  }
+
+  #live-details-edit-form .input-field{
+      margin-top: .1rem;
+  }

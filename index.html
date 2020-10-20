@@ -7,6 +7,7 @@
   <title>পরীক্ষা দাও</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" integrity="sha512-c42qTSw/wPZ3/5LBzD+Bw5f7bSF2oxou6wEb+I/lqeaKV5FDIfMvvRp772y4jcJLKuGUOpbJMdg/BTl50fJYAw==" crossorigin="anonymous" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Google+Sans" as="style" />
+  <link rel="stylesheet" href="https://materializecss.com/css/prism.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
   <link rel="stylesheet" href="./icofont/icofont.min.css" />
@@ -106,6 +107,24 @@
   </div>
 
   <div class="after-login">
+
+
+
+    <!-- Tabs -->
+
+    
+    <div id="test2" class="col s12">
+      <h3>রিসোর্স</h3>
+    </div>
+    <div id="test3" class="col s12">
+      <h3>ফলাফল</h3>
+    </div>
+    <div id="test4" class="col s12">
+      <h3>র‍্যাঙ্ক</h3>
+    </div>
+    <!-- Tabs Ends -->
+
+
     <div class="content-loading">
       <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
         style="margin: auto; background: none; display: block" width="100px" height="100px" viewBox="0 0 100 100"
@@ -176,6 +195,8 @@
       </svg>
     </div>
 
+
+<div id="test1" class="col s12">
     <!-- Live exam -->
 
     <div class="liveExams">
@@ -366,6 +387,15 @@
   </div>
 
   <!-- Global Ranking Modal end -->
+</div>
+
+  <ul class="tabs">
+    <li class="tab col s3"><a class="active" href="#test1">হোম</a></li>
+    <li class="tab col s3"><a  href="#test2">রিসোর্স</a></li>
+    <li class="tab col s3"><a href="#test3">ফলাফল</a></li>
+    <li class="tab col s3"><a href="#test4">র‍্যাঙ্ক</a></li>
+  </ul>
+
   </div>
 
   <!-- before Login -->
@@ -471,6 +501,8 @@
   
   <!-- login & registration end -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://materializecss.com/docs/js/prism.js"></script>
+  <script src="https://materializecss.com/docs/js/lunr.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9.17.2/dist/sweetalert2.all.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
@@ -480,6 +512,7 @@
   <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-database.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-firestore.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-storage.js"></script>
+  
   <script>
     // Your web app's Firebase configuration
     var firebaseConfig = {

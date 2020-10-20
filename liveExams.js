@@ -45,10 +45,10 @@ function addZero(num){if(num<10) return num = '0'+ num; else return num;}
 
   if (distance < 0) {
     clearInterval(x);
-    $('.up').html(`<div class="live animate__animated animate__flip" style="color: var(--danger);">পরীক্ষা চলছে</div>`);
+    $('.up').html(`<div class="" style="color: var(--danger);">পরীক্ষা চলছে</div>`);
 
 
-    $('.live-details').addClass('animate__animated animate__flip');
+    //$('.live-details').addClass('animate__animated animate__flip');
     $('.live-details').text('সময় বাকি');
    // $('.up-timer').html(`<div class="animate__animated animate__fadeIn">Started</div>`);
 
@@ -114,16 +114,16 @@ var countDownDatey = new Date(snap.val()[0].endTime).getTime()
       $('#timerLive').html(`<span id="t">${addZero(daysy)}</span> day <span id="t">${addZero(hoursy)}</span> hr <span id="t">${addZero(minutesy)}</span> min <span id="t">${addZero(seconds)}</span> sec`);
     }
   function addZero(numy){if(numy<10) return numy = '0'+ numy; else return numy;}
-  $('.up').html(`<div class="animate__animated animate__pulse" style="color: var(--danger);">পরীক্ষা চলছে</div>`);
+  $('.up').html(`<div class="" style="color: var(--danger);">পরীক্ষা চলছে</div>`);
     if (distancey < 0) {
       clearInterval(y);
       db.ref('live/0/ended').set({state: true});
       Swal.fire( {icon: 'success', text : 'শেষ!'});
       $('.liveExam').modal('close'); 
-      $('.up').html(`<div class="live animate__animated animate__flip" style="color: var(--danger);">শেষ!</div>`);
+      $('.up').html(`<div class="live" style="color: var(--danger);">শেষ!</div>`);
       setTimeout(function(){
-      $('.live').removeClass('animate__flip');
-      $('.live').addClass('animate__flash');
+     // $('.live').removeClass('animate__flip');
+     // $('.live').addClass('animate__flash');
   }, 2000);
       $('.up-timer').html(``);
       $('.live-details').text('');

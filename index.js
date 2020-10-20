@@ -3,7 +3,8 @@ $('.top-fixed-bar').hide();
 $(".after-login").hide(); //hide after login html contents
 var localphone = localStorage.getItem("phone"),
   localtoken = localStorage.getItem("token");
-
+//console.log(localtoken);
+//console.log(localStorage.getItem('avatar'));
 if (localtoken != null) {
   $(".before-login").remove();
   $(".after-login").show();

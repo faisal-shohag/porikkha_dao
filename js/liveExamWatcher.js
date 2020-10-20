@@ -102,6 +102,8 @@ if (localtoken != null) {
           
           $('#resultPublish').click(function(){
             db.ref('live/0/publishResult').set({state: true});
+            db.ref('live/0/resultText/').set('রেজাল্ট পাবলিশ করা হয়েছে!');
+
             Swal.fire( {icon: 'success', text : 'রেজাল্ট পাবলিশ করা হয়েছে!'});
             
             db.ref('hscUsers').once('value', snap=>{

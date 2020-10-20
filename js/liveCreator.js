@@ -1,4 +1,4 @@
-localStorage.setItem('token', 'faisal235ojdklfjs');
+//localStorage.setItem('token', 'faisal235ojdklfjs');
 
 const details = document.querySelector("#exam-details"),
       question = document.querySelector("#questions-form");
@@ -70,6 +70,7 @@ details.addEventListener("submit", (e) => {
 
     $(".details").html(`
      <div class="d-details">
+     <div class="edit-icon det-edit"><a class="waves-effect waves-light btn modal-trigger" href="#detailsEdit">Edit</a></div>
      <div class="d-title">${exam[0].title}</div>
      <div class="d-time">সময়: ${exam[0].time} মিনিট</div>
      <div class="d-nq">প্রশ্ন সংখ্যা: ${exam[0].nq} টি</div>

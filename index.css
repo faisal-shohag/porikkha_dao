@@ -1378,6 +1378,17 @@ a{
   bottom: 0 !important;
   box-shadow: 0 -2px 2px 1px rgba(0, 0, 0, 0.2);
   z-index: 99;
+ 
+}
+
+.tab a i{
+  font-size: 25px;
+  color: var(--danger);
+}
+
+body.dark .tab a i{
+  font-size: 25px;
+  color: #fff;
 }
 
 #test1{

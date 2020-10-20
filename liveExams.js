@@ -6,7 +6,7 @@ db.ref('live').on('value', snap=>{
  if(snap.val().title === null){
      $('.upcoming').html(`<i>কোন লাইভ এক্সাম নেই!</i>`);
  }else if(snap.val()[0].ended.state === true){
-  $('.up').html(`<div class="live animate__animated animate__flip" style="color: var(--danger);">শেষ!</div>`);
+  $('.up').html(`<div class="live" style="color: var(--danger);">শেষ!</div>`);
   $('.up-timer').html(``);
   $('.live-subject').text(snap.val()[0].title);
   $('.live-details').text(snap.val()[0].nq + ' টি প্রশ্ন | ' + snap.val()[0].score+' মার্কস | ' + snap.val()[0].time + ' মিনিট | ' + 'নেগেটিভ: ' + snap.val()[0].forWrong);

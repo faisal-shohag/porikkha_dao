@@ -216,6 +216,7 @@ display: none;
 .explanation{
     border: 2px solid var(--success);
     padding: 5px;
+    display: none;
 }
 
 
@@ -380,7 +381,7 @@ display: none;
 .exam-time{
     z-index: 99;
     font-size: 15px;
-    background: var(--danger);
+    background: var(--dark);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -394,7 +395,7 @@ display: none;
 .bar{
     position: absolute;
     width: 100%;
-    background: var(--teal);
+    background: var(--secondary);
     height: 20px;
     top: 0;
     animation-name: bar;
@@ -558,9 +559,7 @@ background: #fff;
     scroll-behavior: smooth;
 }
 
-.modal-fixed-footer{
-    border-top: 3px solid red;
-}
+
 
 
 
@@ -573,7 +572,7 @@ background: #fff;
     top: 0;
     left: 0;
     width: 100%;
-    background: var(--danger);
+    background: var(--teal);
     z-index: 98;
     text-align: center;
     box-shadow: 0 2px 8px rgba(0,0,0, .2);
@@ -587,10 +586,7 @@ background: #fff;
     /* position: fixed; */
 }
 
-#exam .wa{
-    /* box-shadow: 0 2px 5px rgba(0,0,0, .2); */
-    background: var(--warning);
-}
+
 
 .submit{
 background: rgb(54, 170, 54);

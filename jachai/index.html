@@ -1,0 +1,236 @@
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" integrity="sha512-c42qTSw/wPZ3/5LBzD+Bw5f7bSF2oxou6wEb+I/lqeaKV5FDIfMvvRp772y4jcJLKuGUOpbJMdg/BTl50fJYAw==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Google+Sans" as="style" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet" href="./styles/main.css">
+    <link rel="stylesheet" href="./styles/login.css">
+    <link rel="stylesheet" href="./styles/questions.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jachai!</title>
+    <script>
+        window.MathJax = {
+          tex: {
+            inlineMath: [['$','$'], ['\\(','\\)']],
+            displayMath: [['\\[','\\]'], ['$$','$$']]
+          }
+        };
+        </script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script"></script> -->
+</head>
+<body>
+
+
+    
+
+
+
+
+
+<div class="exam-list">
+  <!-- <center><div class="spinner"></div></center> -->
+</div>
+
+<!-- <div class="exam-create-button"><span class="material-icons">add</span></div> -->
+<a class="btn-floating btn-large waves-effect waves-light green exam-create-button"><i class="material-icons">add</i></a>
+     
+
+<!-- Modal Structure -->
+<div id="exam" class="modal modal-fixed-footer exam-modal">
+    <div class="exam-title"></div>
+  <div class="modal-content">
+    
+    <div class="exam-container">
+        <div class="exam-details">
+            <div class="exam-time"><span class="timer"></span><div class="bar"> </div>
+        </div>
+        <div class="score">
+            <div class="mark"></div>
+            <div class="score-wa"></div>
+            <div class="score-na"></div>
+            <div class="score-ng"></div>
+        </div>
+        </div>
+        <div class="questions"></div>
+        <!-- <button class="submit"> Submit </button> -->
+        <!-- <button class="download">PDF</button> -->
+        </div>
+  </div>
+
+  <div class="modal-footer">
+    <div class="submit" id="submit">সাবমিট করো! </div>
+  </div>
+</div>
+
+<div class="exam-create-container">
+  <div class="q-count">
+    প্রশ্ন সংখ্যাঃ <span id="q-count">..</span>
+  </div>
+  <div class="submit wa" id="exam-create-close"></div>
+  <div class="submit" id="exam-publish">Publish</div>
+  <div class="create-view" id="view">View/Edit</div>
+  <div class="create-view" id="exit">Close</div>
+  <div class="create-history-status" id="history-delete">Delete History</div>
+  <div class="create">
+    <div class="create-details">
+      <div class="input-field">
+        <input type="text" id="exam-name" required/>
+        <label for="name">পরীক্ষার নাম...</label>
+      </div>
+
+      <div class="input-field col s12">
+        <select id="exam-sub" required>
+          <option class="dis" value="" disabled selected>Subject</option>
+          <option value="ModelTest">Model Test</option>
+          <option value="Bangla">Bangla</option>
+          <option value="English">English</option>
+          <option value="ICT">ICT</option>
+          <option value="Economics">Economics</option>
+          <option value="Civics">Civics</option>
+          <option value="Geography">Geography</option>
+        </select>
+      </div>
+
+      <div class="input-field col s12">
+        <select id="exam-time" required>
+          <option class="dis" value="" disabled selected>সময়(minute)</option>
+          <option value="10">10</option>
+          <option value="15">15</option>
+          <option value="20">20</option>
+          <option value="25">25</option>
+          <option value="30">30</option>
+          <option value="35">35</option>
+          <option value="40">40</option>
+          <option value="45">45</option>
+          <option value="50">50</option>
+          <option value="60">60</option>
+          <option value="90">90</option>
+          <option value="120">120</option>
+        </select>
+      </div>
+
+      <div class="input-field col s12">
+        <select id="exam-negative" required>
+          <option class="dis" value="" disabled selected>নেগেটিভ মার্ক</option>
+          <option value="0.25">0.25</option>
+          <option value="0">0</option>
+          <option value="1">1</option>
+          <option value="1.25">1.25</option>
+        </select>
+      </div>
+       <div>
+      <textarea id="exam-NB" placeholder="নোটিশ/Announcement/NB"></textarea>
+    </div>
+    <br/>
+    <div class="submit" id="add-d">Next</div>
+    <br/>
+    </div>
+
+    <div class="create-question">
+    <div class="create-q">
+      <textarea id="create-q" placeholder="প্রশ্নটি লিখুন!"></textarea>
+    </div>
+    <div class="create-options">
+      <div class="create-option">
+     <div class="opt"><textarea id="a" placeholder="অপশন A"></textarea></div>
+     <div class="opt"><textarea id="b" placeholder="অপশন B"></textarea></div>
+     <div class="opt"><textarea id="c" placeholder="অপশন C"></textarea></div>
+     <div class="opt"><textarea id="d" placeholder="অপশন D"></textarea></div>
+      </div>
+    </div>
+
+    <div class="input-field col s12">
+      <select id="select-ans">
+        <option class="dis" value="" disabled selected>উত্তর</option>
+        <option value="1">A</option>
+        <option value="2">B</option>
+        <option value="3">C</option>
+        <option value="4">D</option>
+      </select>
+    </div>
+
+    <div class="create-q">
+      <textarea id="create-ex" placeholder="ব্যাখ্যা/সমাধান"></textarea>
+    </div>
+
+    <div class="submit" id="add-q">Add Q</div>
+  </div>
+
+  <div class="create-show">
+    <div class="details-show">
+      
+    </div>
+    <div class="questions view-questions"></div>
+  </div>
+
+</div>
+</div>
+
+<!-- 
+1.login
+2.exam creating
+3.exam finder
+
+ -->
+
+
+
+
+
+
+
+
+    <!-- <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js"></script>
+    <script src="https://unpkg.com/angular-ui-router@0.4.2/release/angular-ui-router.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/0.9.0rc1/jspdf.min.js"></script> -->
+    
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js" integrity="sha512-s/XK4vYVXTGeUSv4bRPOuxSDmDlTedEpMEcAQk0t/FMd9V6ft8iXdwSBxV0eD60c6w/tjotSlKu9J2AAW1ckTA==" crossorigin="anonymous"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9.17.2/dist/sweetalert2.all.min.js"></script> 
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script> -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9.17.2/dist/sweetalert2.all.min.js"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <!-- <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-app.js"></script> -->
+  <!-- <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-analytics.js"></script> -->
+  <!-- <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-auth.js"></script> -->
+  <!-- <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-database.js"></script> -->
+  <!-- <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-firestore.js"></script> -->
+  <!-- <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-storage.js"></script> -->
+
+   <script src="./scripts/firebase/fire-app.js"></script>
+   <script src="./scripts/firebase/firebase-analytics.js"></script>
+   <script src="./scripts/firebase/auth.js"></script>
+   <script src="./scripts/firebase/database.js"></script>
+   <script src="./scripts/firebase/firestore.js"></script>
+   <script src="./scripts/firebase/storage.js"></script>
+  <!-- <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-analytics.js"></script> -->
+  <!-- <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-auth.js"></script> -->
+  <!-- <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-database.js"></script> -->
+  <!-- <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-firestore.js"></script> -->
+  <!-- <script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-storage.js"></script> -->
+  
+  <script>
+    //web app's Firebase configuration
+    var firebaseConfig = {
+    apiKey: "AIzaSyAx0Oc2oSJA2anwfHseJZqwuAdnojI6jvY",
+    authDomain: "live-exam-7c7a8.firebaseapp.com",
+    databaseURL: "https://live-exam-7c7a8.firebaseio.com",
+    projectId: "live-exam-7c7a8",
+    storageBucket: "live-exam-7c7a8.appspot.com",
+    messagingSenderId: "577429915483",
+    appId: "1:577429915483:web:4fafe4a69bab7b1b063c7e",
+    measurementId: "G-6834S6GV1W"
+  };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+    var store = firebase.firestore();
+    var db = firebase.database();
+    var storage = firebase.storage();
+  </script>
+    <script src="./scripts/main.js"></script>
+    <script src="./scripts/create.js"></script>
+</body>
+</html>

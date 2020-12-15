@@ -220,6 +220,7 @@ $('#submit').click(function(){
       clearInterval(progInterval);
       document.querySelector('.modal-content').scrollTop = 0;
       let e;
+      $('.explanation').show();
       for(let k=0; k<ans.length; ++k){
         e=k;
         e = '#exp-'+e;

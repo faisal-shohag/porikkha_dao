@@ -153,6 +153,7 @@ db.ref('jachai/history/practice/questions/'+ questionData.length).update(qData);
 
 db.ref('jachai/history/practice/questions').on('value', q=> {
     let qq=-1;
+    document.querySelector('.view-questions').innerHTML='';
     q.forEach(element => {
         qq++;
         questionData.push(element.val());
@@ -236,12 +237,3 @@ $('#exam-create-close').click(function(){
     $('.exam-create-container').hide();
 })
 
-
-
-var obj = {
-    name: 'faisal'
-}
-
-obj['age'] = 23
-
-console.log(obj)
